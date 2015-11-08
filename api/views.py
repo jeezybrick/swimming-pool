@@ -73,15 +73,11 @@ class CurrentUserDetail(generics.GenericAPIView):
         return Response(serializer.data)
 
     def post(self, request):
-        serializer = serializers.UserSerializer(data=request.data, instance=request.user)
-        if serializer.is_valid():
-            serializer.save(is_auth=True)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        mem_id = request.data['mem_id']
+        if mem_id == 2:
+            user = OAuthUser.objects.get(id=request.user.id)
+            user.is_auth = True
+            user.save()
+            return Response(status=status.HTTP_201_CREATED)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 
-    def put(self, request):
-        serializer = serializers.UserSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
