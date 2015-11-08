@@ -135,10 +135,11 @@ angular
     .module('myApp')
     .controller('LoginCtrl', LoginCtrl);
 
-function LoginCtrl($scope, $http, $location, $window, Flash, AuthUser) {
+function LoginCtrl($scope, $http, $location,$timeout, $window, Flash, AuthUser) {
 
     $scope.page = '/api/user/';
-    $scope.errorLoginMessage = 'Incorrect username or password.';
+    $scope.errorLoginMessage = 'Incorrect name or membership id.';
+    $scope.successLoginMessage = 'You on!';
     $scope.loginProcess = false;
     $scope.user = AuthUser;
     $scope.title = 'Login';
@@ -149,8 +150,13 @@ function LoginCtrl($scope, $http, $location, $window, Flash, AuthUser) {
 
         $http.post($scope.page, $scope.user).success(function () {
 
-            //$location.path('/');
-            $window.location.href = '/';
+            Flash.create('success', $scope.successLoginMessage, 'flash-message');
+            $scope.delay = $timeout(function () {
+
+                $window.location.href = '/';
+
+            }, 1000);
+
 
         }).error(function (error) {
 
