@@ -1,0 +1,165 @@
+{% load staticfiles %}
+{% load i18n %}
+
+<!DOCTYPE html>
+<html lang="" ng-app="myApp">
+<head>
+    <!-- Angular HTML5 mode -->
+    <base href="/" />
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Stacenko Andrey">
+    <title>{% block title %}{% endblock %} &ndash; Pool</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+    <!-- Font awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+    <!-- Angular motion for animations -->
+    <link rel="stylesheet" href="//rawgithub.com/mgcrea/angular-motion/master/dist/angular-motion.min.css">
+
+    <!-- Angular material -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-material/0.11.4/angular-material.min.css">
+
+    <!-- Custom css -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/media.css' %}">
+
+    <!-- animate css -->
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+
+    <!-- angular flash for flash messages -->
+    <link rel="stylesheet" href="{% static 'css/angular-flash.css' %}">
+
+    <!-- angular-calendar -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.4.0/fullcalendar.min.css">
+    <link rel="stylesheet" href="{%  static 'css/angular-datepicker.min.css' %}">
+
+    <style>body {
+    }
+
+    .starter-template {
+        padding: 40px 15px;
+        text-align: center;
+    }</style>
+
+    <!--[if IE]>
+        <script src="https://cdn.jsdelivr.net/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+{% if user.is_authenticated and user.is_auth %}
+    <div>
+
+        <!-- Navbar -->
+       {% include 'partials/nav.html' %}
+    </div>
+{% endif %}
+
+{% if not user.is_authenticated or not user.is_auth %}
+    <div>
+
+        <!-- Navbar -->
+       {% include 'partials/my_nav.html' %}
+    </div>
+{% endif %}
+
+{% if user.is_authenticated and not user.is_auth %}
+    <div ng-controller="LoginCtrl">
+        <!-- Navbar -->
+       {% include 'partials/login.html' %}
+    </div>
+{% endif %}
+
+<div class="container-fluid main-content">
+
+    <div ui-view></div>
+
+</div>
+
+
+<!-- Jquery and bootstrap -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<!-- Angular -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.6/angular-resource.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.10/angular-route.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-animate.js"></script>
+<script src="{% static 'js/angular-flash.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-strap/2.3.3/angular-strap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-strap/2.3.3/angular-strap.tpl.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.6/angular-aria.min.js"></script>
+
+<!-- Angular Material Javascript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-material/0.11.4/angular-material.min.js"></script>
+
+<!-- angular-loading-bar  -->
+<script src='//cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.7.1/loading-bar.min.js'></script>
+
+<!-- angular-filter -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.7/angular-filter.min.js'></script>
+
+<!-- angular-messages -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.6/angular-messages.min.js'></script>
+
+<!-- Bootbox for modals -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+
+<!-- Moment.js -->
+<script src="{% static 'js/moment.js' %}"></script>
+
+<!-- Custom js -->
+<script src="{% static 'js/app.js' %}"></script>
+
+<script src="{% static 'js/services.js' %}"></script>
+<script src="{% static 'js/controllers.js' %}"></script>
+<script src="{% static 'js/common.js' %}"></script>
+
+<!-- ui bootstrap -->
+<script src="{% static 'js/ui-bootstrap.min.js' %}"></script>
+
+<!-- angular-calendar -->
+<script src="{% static 'js/calendar.js' %}"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.4.0/fullcalendar.min.js"></script>
+<script src="{% static 'js/angular-datepicker.min.js' %}"></script>
+
+<!-- Google auth angular -->
+<!--[if lte IE 9]>
+<script src="//cdnjs.cloudflare.com/ajax/libs/Base64/0.3.0/base64.min.js"></script>
+<![endif]-->
+<script src="//cdn.jsdelivr.net/satellizer/0.13.0/satellizer.min.js"></script>
+
+<script>
+  // This allows you to access the current user id in your angular controllers.
+  angular
+      .module('myApp.services')
+      .factory('AuthUser', function() {
+        return {
+          id: "{{ user.id|default:''}}",
+          username: "{{ user.username|default:''}}",
+          fullname: "{{ user.fullname|default:'' }}",
+          is_auth: "{{ user.is_auth|default:'' }}",
+        }
+      });
+</script>
+
+<!-- Add color and pulse class if current user have items in cart -->
+{% if request.session.in_cart %}
+    <script>
+        $('#cart-on-nav').find('> a').css('color', '#7DDE7D').addClass('animated infinite pulse');
+        $('#cart-on-nav-xs').find('> a').css('color', '#7DDE7D').addClass('animated infinite pulse');
+    </script>
+{% endif %}
+
+</body>
+</html>

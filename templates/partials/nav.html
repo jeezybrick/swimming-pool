@@ -1,0 +1,58 @@
+{% load i18n %}
+
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            {% if user.is_authenticated %}
+                <ul class="nav navbar-nav hidden-lg hidden-md hidden-sm pull-left">
+                    <li id="user-on-nav-xs">
+                        <a ui-sref="home">
+                            <i class="fa fa-calendar fa-2x"></i>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav hidden-lg hidden-md hidden-sm pull-left">
+                    <li id="calendar-on-nav-xs">
+                        <a ui-sref="my-bookings">
+                            <i class="fa fa-user fa-2x"></i>
+                        </a>
+                    </li>
+
+                </ul>
+            {% endif %}
+        </div>
+
+        <div id="navbar" class="navbar-collapse collapse text-center">
+            <ul class="nav navbar-nav text-center">
+                <li id="cog-on-nav" class="hidden-xs">
+                        <a ui-sref="home">
+                            <i class="fa fa-calendar fa-3x"></i>
+                        </a>
+                </li>
+                <li id="cog-on-nav" class="hidden-xs">
+                        <a ui-sref="my-bookings">
+                            <i class="fa fa-user fa-3x"></i>
+                        </a>
+                </li>
+
+                {% if user.is_staff %}
+                    <li><a href="/admin/" target="_self">Admin</a>
+                    </li>
+                {% endif %}
+            </ul>
+            {% if user.is_authenticated %}
+                <!-- nav right -->
+                <ul class="nav navbar-nav navbar-right">
+
+                    <li>
+                        <a href="{% url 'logout' %}" target="_self">
+                            Logout
+                        </a>
+                    </li>
+
+                </ul>
+            {%  endif %}
+        </div>
+
+    </div>
+</nav>

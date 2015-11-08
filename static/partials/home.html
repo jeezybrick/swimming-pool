@@ -1,0 +1,70 @@
+<div class="row home">
+
+    <div class="calendar-block col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center"
+         ng-if="isUserAuth() && isUserActive()">
+        <div ui-calendar="uiConfig.calendar" ng-model="booking"></div>
+    </div>
+    <!-- preloader -->
+    <div class="row" ng-hide="bookingLoad || !isUserAuth() || !isUserActive()">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center center-block" style="margin-top: 80px;">
+            <div layout="row" layout-sm="column" layout-align="space-around">
+                <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center"
+         ng-if="isUserAuth() && isUserActive() && bookingLoad">
+        <div class="row">
+            <div class="order-time-step col-lg-3 col-md-4 col-sm-4 col-xs-12"
+                 ng-class="{'disable-time-slot':booking.is_booked}" ng-repeat="booking in booking">
+                <div class="row">
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-6 text-center">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                                <h5>[[ selectedDate | date:'MMM d' ]]</h5>
+                                <h4>[[ booking.time_start ]] - [[ booking.time_end ]]</h4>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-6 text-center">
+                        <md-button class="md-raised" ng-hide="booking.is_booked" ng-click="makeOrder(booking)">
+                            <i class="fa fa-plus fa-md"></i> Order
+                        </md-button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="starter-template" ng-hide="isUserAuth()">
+    <p class="lead animated zoomIn">
+
+    <h2 class="main-greet animated fadeInUp">
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+            <div layout="row" layout-sm="column" layout-align="space-around" ng-if="signInProcess">
+                <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+            </div>
+
+            <md-button class="md-raised md-primary" href="/login/google-oauth2/" target="_self" ng-click="signInProcess=true">
+                Sign in with Google
+            </md-button>
+        </div>
+
+    </h2>
+    </p>
+</div>
+
+<!-- Flash error messages -->
+<div class="col-lg-12">
+    <div flash-message="4000"></div>
+</div>

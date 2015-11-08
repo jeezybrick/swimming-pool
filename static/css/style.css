@@ -1,0 +1,80 @@
+
+.wrapper-form {
+    text-align: center;
+    margin-top: 150px;
+}
+
+.home {
+    margin-top: 150px;
+}
+
+.flash-message {
+    margin: 50px 0 0 0;
+    position: fixed;
+    top: 0;
+    left: 40%;
+    padding: 0;
+}
+
+#cog-on-nav {
+    margin-right: 10px;
+}
+
+#cog-on-nav > a {
+    padding: 3px 5px;
+    min-height: 50px;
+    color: white;
+}
+
+#user-on-nav-xs > a {
+    padding: 3px 0;
+    margin: 0 30px;
+}
+
+#calendar-on-nav-xs > a {
+    padding: 3px 0;
+    color: white;
+    margin-left: 15px;
+}
+
+.disable-time-slot {
+    background-color: #EBE9E9;
+}
+
+.cancel-order-block {
+    margin-top: 30px;
+}
+
+.cancel-order-block > a {
+    color: gray;
+}
+
+.order-time-step {
+    border: solid 1px #ddd;
+    padding: 30px;
+    height: 160px;
+}
+.calendar-block{
+    margin-top: -80px;
+}
+.order-detail{
+    border: solid 1px #ddd;
+}
+
+/* ng - animate */
+.order-detail.ng-enter{
+    animation: fadeIn 1s;
+}
+
+.order-detail.ng-leave{
+    animation: fadeOutDownBig 2s;
+}
+
+.order-time-step.ng-enter{
+    animation: fadeIn 1s;
+}
+/*
+.order-time-step.ng-leave{
+    animation: fadeIOut 1s;
+}*/
+/*! ng - animate */
