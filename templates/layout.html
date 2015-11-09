@@ -64,7 +64,7 @@
 {% endif %}
 
 {% if not user.is_authenticated or not user.is_auth %}
-    <div>
+    <div ng-controller="AuthController">
 
         <!-- Navbar -->
        {% include 'partials/my_nav.html' %}

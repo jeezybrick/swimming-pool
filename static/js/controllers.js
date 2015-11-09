@@ -207,3 +207,34 @@ function BookingsController($scope, $http, $location, $window, Flash, MyBookings
 
 
 }
+
+angular
+    .module('myApp')
+    .controller('AuthController', AuthController);
+
+function AuthController($scope, AuthUser) {
+
+    $scope.user = AuthUser;
+    $scope.title = 'signup';
+
+    if (angular.isDefined($scope.user)) {
+
+        $scope.isUserAuth = function () {
+            return $scope.user.id;
+        };
+
+        $scope.isUserActive = function () {
+            return $scope.user.is_auth;
+        };
+
+        if ($scope.isUserAuth() && !$scope.isUserActive()) {
+            $scope.title = 'login';
+        }
+
+        if (!$scope.isUserAuth() && !$scope.isUserActive()) {
+            $scope.title = 'signup';
+        }
+
+    }
+}
+
