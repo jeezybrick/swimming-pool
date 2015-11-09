@@ -117,7 +117,7 @@ class CurrentUserDetail(generics.GenericAPIView):
             data = csv.reader(mem_id_list)
             for row in data:
                 for fields in row:
-                    if mem_id == int(fields):
+                    if str(mem_id) == fields:
                         user.is_auth = True
                         user.save()
                         return Response('You on!', status=status.HTTP_202_ACCEPTED)
