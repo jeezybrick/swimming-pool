@@ -112,19 +112,16 @@ class CurrentUserDetail(generics.GenericAPIView):
 
     def post(self, request):
         mem_id = request.data['mem_id']
-        user = OAuthUser.objects.get(id=request.user.id)
-        if user.is_banned:
+        if request.user.is_banned:
             return Response('You banned ;(', status=status.HTTP_403_FORBIDDEN)
         with open('mem_id.csv') as mem_id_list:
             data = csv.reader(mem_id_list)
             for row in data:
                 for fields in row:
                     if str(mem_id) == fields:
-                        serializer = serializers.UserSerializer(data=request.data)
+                        serializer = serializers.UserSerializer(data=request.data, instance=request.user)
                         if serializer.is_valid():
-                            user.is_auth = True
-                            user.save()
-                            serializer.save()
+                            serializer.save(is_auth=True)
                             return Response('You on!', status=status.HTTP_202_ACCEPTED)
                         return Response('Username is required field', status=status.HTTP_400_BAD_REQUEST)
 
