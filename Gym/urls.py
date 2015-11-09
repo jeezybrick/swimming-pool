@@ -21,18 +21,10 @@ from django.views.generic import TemplateView
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
 
-    # Home view
-    url(r"^$", TemplateView.as_view(
-        template_name='home.html'
-    ), name='home'),
-
-    # Home view
-    url(r"^my_bookings/$", TemplateView.as_view(
-        template_name='home.html'
-    ), name='my_bookings'),
-
     url(r'^', include('my_auth.urls')),
     url(r'^', include('api.urls')),
+
+
 
     # url(r'^rest-auth/', include('rest_auth.urls')),
     # url(r'^rest-auth/registration/', include('rest_auth.registration.urls')),
@@ -40,4 +32,8 @@ urlpatterns = [
 
     # Social
     url('', include('social.apps.django_app.urls', namespace='social')),
+
+    url(r'^.*$', TemplateView.as_view(
+        template_name='layout.html'
+    ), name='index'),
 ]

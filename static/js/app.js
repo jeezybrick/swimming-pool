@@ -66,5 +66,10 @@ angular
                 templateUrl: '/static/partials/my-bookings.html',
                 controller: 'BookingsController'
             })
+            .state('otherwise', {
+                url : '*path',
+                templateUrl: '/static/partials/home.html',
+                controller: 'HomeController'
+            })
 
     });
