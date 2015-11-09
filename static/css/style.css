@@ -78,7 +78,7 @@
 
 /* ng - animate */
 .order-detail.ng-enter {
-    animation: fadeIn 1s;
+    animation: fadeInU 1s;
 }
 
 .order-detail.ng-leave {
@@ -86,11 +86,6 @@
 }
 
 .order-time-step.ng-enter {
-    animation: fadeIn 1s;
+    animation: fadeInDown 1s;
 }
-
-/*
-.order-time-step.ng-leave{
-    animation: fadeIOut 1s;
-}*/
 /*! ng - animate */

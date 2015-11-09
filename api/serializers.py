@@ -17,6 +17,7 @@ class UserSerializer(serializers.ModelSerializer):
 class BookingSerializer(serializers.ModelSerializer):
 
     maxDaysToOrder = 86400 * 5  # days selection list limited to the next 5 days
+    swim_lane = serializers.IntegerField(read_only=True)
 
     class Meta:
         model = Booking
@@ -24,7 +25,7 @@ class BookingSerializer(serializers.ModelSerializer):
 
     def validate_start_date(self, start_date):
         if (start_date - datetime.datetime.now().date()).total_seconds() > self.maxDaysToOrder:
-            raise serializers.ValidationError(_("Error!"))
+            raise serializers.ValidationError(_("5 days from now is max!"))
         return start_date
 
 
