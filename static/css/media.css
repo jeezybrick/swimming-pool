@@ -24,6 +24,10 @@
         font-size: 36px;
     }
 
+    .flash-message {
+        width: 45%;
+    }
+
 }
 
 /* Landscape phones and portrait tablets */
@@ -33,6 +37,10 @@
         letter-spacing: 0.05em;
     }
 
+    .flash-message {
+        width: 50%;
+    }
+
 }
 
 /* Portrait phones and smaller */
@@ -40,6 +48,15 @@
 
     .main-greet {
         letter-spacing: 0.02em;
+    }
+
+    .login-btn, .sign-btn {
+        width: 100%;
+        display: block;
+    }
+
+    .flash-message {
+        width: 90%;
     }
 
 }
