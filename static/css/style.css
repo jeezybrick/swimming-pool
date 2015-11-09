@@ -36,7 +36,6 @@
 #cog-on-nav > a {
     padding: 3px 5px;
     min-height: 50px;
-    color: white;
 }
 
 #user-on-nav-xs > a {
@@ -46,7 +45,6 @@
 
 #calendar-on-nav-xs > a {
     padding: 3px 0;
-    color: white;
     margin-left: 15px;
 }
 
