@@ -11,14 +11,10 @@ class UserSerializer(serializers.ModelSerializer):
         model = OAuthUser
         fields = ('fullname', )
 
-    def validate(self, value):
-        print(value)
-        return value
-
 
 class BookingSerializer(serializers.ModelSerializer):
 
-    maxDaysToOrder = 86400 * 5  # 5 days
+    maxDaysToOrder = 86400 * 5  # days selection list limited to the next 5 days
 
     class Meta:
         model = Booking

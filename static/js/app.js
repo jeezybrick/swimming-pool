@@ -56,11 +56,6 @@ angular
                 templateUrl: '/static/partials/my_auth/login.html',
                 controller: 'LoginCtrl'
             })
-            .state('auth-registration', {
-                url: '/register/',
-                templateUrl: '/static/partials/my_auth/register.html',
-                controller: 'RegistrationController'
-            })
             .state('home', {
                 url: '/',
                 templateUrl: '/static/partials/home.html',

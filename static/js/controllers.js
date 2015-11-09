@@ -138,8 +138,6 @@ angular
 function LoginCtrl($scope, $http, $location,$timeout, $window, Flash, AuthUser) {
 
     $scope.page = '/api/user/';
-    $scope.errorLoginMessage = 'Incorrect name or membership id.';
-    $scope.successLoginMessage = 'You on!';
     $scope.loginProcess = false;
     $scope.user = AuthUser;
     $scope.title = 'Login';
@@ -148,9 +146,9 @@ function LoginCtrl($scope, $http, $location,$timeout, $window, Flash, AuthUser) 
     $scope.sendLoginData = function () {
         $scope.loginProcess = true;
 
-        $http.post($scope.page, $scope.user).success(function () {
+        $http.post($scope.page, $scope.user).success(function (response) {
 
-            Flash.create('success', $scope.successLoginMessage, 'flash-message');
+            Flash.create('success', response, 'flash-message');
             $scope.delay = $timeout(function () {
 
                 $window.location.href = '/';
@@ -161,7 +159,7 @@ function LoginCtrl($scope, $http, $location,$timeout, $window, Flash, AuthUser) 
         }).error(function (error) {
 
             $scope.sendLoginDataError = error;
-            Flash.create('danger', $scope.errorLoginMessage, 'flash-message');
+            Flash.create('danger', error, 'flash-message');
             $scope.loginProcess = false;
         });
     };
@@ -170,47 +168,17 @@ function LoginCtrl($scope, $http, $location,$timeout, $window, Flash, AuthUser) 
 
 }
 
-angular
-    .module('myApp')
-    .controller('RegistrationController', RegistrationController);
-
-function RegistrationController($scope, $http, $location, $window, Flash) {
-
-    $scope.page = '/rest-auth/registration/';
-    $scope.errorRegisterMessage = 'Incorrect username or password.';
-
-    $scope.user = {
-        username : undefined,
-        password1: undefined,
-        password2: undefined
-    };
-
-    $scope.sendRegisterData = function () {
-
-        $http.post($scope.page, $scope.user).success(function () {
-
-            //$location.path('/');
-            //$window.location.href = '/';
-
-        }).error(function (error) {
-
-            $scope.sendRegisterDataError = error;
-            Flash.create('danger', $scope.sendRegisterDataError, 'flash-message');
-        });
-    };
-
-}
-
 
 angular
     .module('myApp')
     .controller('BookingsController', BookingsController);
 
-function BookingsController($scope, $http, $location, $window, Flash, MyBookings) {
+function BookingsController($scope, $http, $location, $window, Flash, MyBookings, AuthUser) {
 
     var date = new Date();
     $scope.currentDate = moment(date).format('MMMM ' + 'YYYY');
     $scope.ordersLoad = false;
+    $scope.user = AuthUser;
 
     $scope.bookings = MyBookings.query(function () {
 
@@ -239,33 +207,3 @@ function BookingsController($scope, $http, $location, $window, Flash, MyBookings
 
 
 }
-
-/**
- * Directive for formatting date from datepicker Angular UI( add action form )
- */
-angular
-    .module('myApp')
-    .directive('myDate', function (dateFilter, $parse) {
-        return {
-            restrict: 'EAC',
-            require: '?ngModel',
-            link: function (scope, element, attrs, ngModel, ctrl) {
-                ngModel.$parsers.push(function (viewValue) {
-                    return dateFilter(viewValue, 'yyyy-MM-dd');
-                });
-            }
-        }
-    });
-
-/**
- * Filter for pagination comments
- */
-angular
-    .module('myApp')
-    .filter('startFrom', function () {
-        return function (data, start) {
-            if (angular.isDefined(data)) {
-                return data.slice(start)
-            }
-        }
-    });

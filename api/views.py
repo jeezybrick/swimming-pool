@@ -1,4 +1,8 @@
+import csv
+from django.utils import timezone
+from django.shortcuts import redirect
 from django.core.mail import send_mail
+from django.http import Http404
 from rest_framework import generics, status, permissions
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.views import APIView
@@ -35,10 +39,42 @@ class BookingList(APIView):
 
 
 # Order detail
-class BookingDetail(generics.RetrieveUpdateDestroyAPIView):
-    serializer_class = serializers.BookingSerializer
-    queryset = Booking.objects.all()
+class BookingDetail(APIView):
     permission_classes = (permissions.IsAuthenticated, IsAuthorOrReadOnly)
+    maxTime = 5 * 60  # 5 minutes grace period
+
+    def get_object(self, pk):
+        try:
+            return Booking.objects.get(pk=pk)
+        except Booking.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        order = self.get_object(pk)
+        serializer = serializers.BookingSerializer(order)
+        return Response(serializer.data)
+
+    def put(self, request, pk, format=None):
+        order = self.get_object(pk)
+        serializer = serializers.BookingSerializer(order, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk, format=None):
+        order = self.get_object(pk)
+        if (timezone.now() - order.created_at).total_seconds() >= self.maxTime:
+            user = OAuthUser.objects.get(id=request.user.id)
+            user.attempt_to_ban += 1
+
+            if user.attempt_to_ban >= 3:
+                user.is_auth = False
+                user.is_banned = True
+                user.banned_to = timezone.now() + timezone.timedelta(days=5)
+            user.save()
+        order.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 # List of time.30 min step
@@ -74,10 +110,15 @@ class CurrentUserDetail(generics.GenericAPIView):
 
     def post(self, request):
         mem_id = request.data['mem_id']
-        if mem_id == 2:
-            user = OAuthUser.objects.get(id=request.user.id)
-            user.is_auth = True
-            user.save()
-            return Response(status=status.HTTP_201_CREATED)
-        return Response(status=status.HTTP_400_BAD_REQUEST)
-
+        user = OAuthUser.objects.get(id=request.user.id)
+        if user.is_banned:
+            return Response('You banned ;(', status=status.HTTP_403_FORBIDDEN)
+        with open('mem_id.csv') as mem_id_list:
+            data = csv.reader(mem_id_list)
+            for row in data:
+                for fields in row:
+                    if mem_id == int(fields):
+                        user.is_auth = True
+                        user.save()
+                        return Response('You on!', status=status.HTTP_202_ACCEPTED)
+        return Response('Wrong membership card id.', status=status.HTTP_403_FORBIDDEN)

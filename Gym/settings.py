@@ -124,6 +124,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = ('static', )
 
+
 # Default auth model
 AUTH_USER_MODEL = 'my_auth.MyUser'
 
@@ -168,6 +169,8 @@ SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
 # SOCIAL_AUTH_NEW_USER_REDIRECT_URL = '/login/'
 
 SOCIAL_AUTH_LOGIN_ERROR_URL = '/'
+
+# SOCIAL_AUTH_INACTIVE_USER_URL = '/login/'
 
 
 SOCIAL_AUTH_PIPELINE = (
