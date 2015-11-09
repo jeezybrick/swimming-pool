@@ -7,6 +7,8 @@ from booking.models import Booking, BookingTimeStep
 
 class UserSerializer(serializers.ModelSerializer):
 
+    fullname = serializers.CharField(required=True, max_length=50)
+
     class Meta:
         model = OAuthUser
         fields = ('fullname', )

@@ -1,5 +1,7 @@
 import csv
 from django.utils import timezone
+from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from django.core.mail import send_mail
 from django.http import Http404
@@ -33,7 +35,7 @@ class BookingList(APIView):
     def post(self, request):
         serializer = serializers.BookingSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save(user=self.request.user)
+            serializer.save(user=self.request.user, swim_lane=3)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -118,7 +120,12 @@ class CurrentUserDetail(generics.GenericAPIView):
             for row in data:
                 for fields in row:
                     if str(mem_id) == fields:
-                        user.is_auth = True
-                        user.save()
-                        return Response('You on!', status=status.HTTP_202_ACCEPTED)
+                        serializer = serializers.UserSerializer(data=request.data)
+                        if serializer.is_valid():
+                            user.is_auth = True
+                            user.save()
+                            serializer.save()
+                            return Response('You on!', status=status.HTTP_202_ACCEPTED)
+                        return Response('Username is required field', status=status.HTTP_400_BAD_REQUEST)
+
         return Response('Wrong membership card id.', status=status.HTTP_403_FORBIDDEN)

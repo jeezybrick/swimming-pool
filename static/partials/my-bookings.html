@@ -21,7 +21,7 @@
     <div class="row">
         <div class="order-detail col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-repeat="booking in bookings">
             <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-9">
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <h4>[[ booking.start_date | date:'MMM d' ]]</h4>
@@ -37,7 +37,7 @@
                     </div>
                 </div>
 
-                <div class="cancel-order-block col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right">
+                <div class="cancel-order-block col-lg-6 col-md-6 col-sm-6 col-xs-3 text-right">
                     <a href="javascript:void(0);" ng-click="removeOrder($index)">
                         <i class="fa fa-times-circle fa-3x"></i>
                     </a>
@@ -47,7 +47,7 @@
         </div>
     </div>
     <!-- Flash error messages -->
-    <div class="col-lg-12">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
         <div flash-message="4000"></div>
     </div>
 

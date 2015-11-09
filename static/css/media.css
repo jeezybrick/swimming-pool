@@ -6,6 +6,10 @@
         letter-spacing: 0.01em;
     }
 
+    .login-btn, .sign-btn {
+        width: 25%;
+    }
+
 }
 
 /* Landscape tablets and medium desktops */
@@ -13,6 +17,10 @@
 
     .main-greet {
         font-size: 40px;
+    }
+
+    .login-btn, .sign-btn {
+        width: 30%;
     }
 
 }
@@ -28,6 +36,10 @@
         width: 45%;
     }
 
+    .login-btn, .sign-btn {
+        width: 50%;
+    }
+
 }
 
 /* Landscape phones and portrait tablets */
@@ -39,6 +51,10 @@
 
     .flash-message {
         width: 50%;
+    }
+
+    .login-btn, .sign-btn {
+        width: 60%;
     }
 
 }
