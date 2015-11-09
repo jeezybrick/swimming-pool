@@ -11,7 +11,7 @@ class Booking(models.Model):
     end_time = models.TimeField()
     created_at = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.user
 
 

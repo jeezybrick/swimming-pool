@@ -35,8 +35,17 @@ class BookingList(APIView):
     def post(self, request):
         serializer = serializers.BookingSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save(user=self.request.user, swim_lane=3)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+            # automatic choose line in specific time
+            orders = Booking.objects.filter(start_time=request.data['start_time'], start_date=request.data['start_date'])
+            swim_lanes_default = [1, 2, 3, 4, 5, 6]
+            swim_lanes_on_orders = [order.swim_lane for order in orders]
+            result = set(swim_lanes_default) - set(swim_lanes_on_orders)
+            if result:
+                serializer.save(user=self.request.user, swim_lane=min(result))
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response('All lines booked in this time:(', status=status.HTTP_400_BAD_REQUEST)
+
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 

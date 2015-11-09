@@ -113,7 +113,7 @@ function HomeController($scope, $timeout, AuthUser, Booking, MyBookings, Flash, 
 
                 }, function (error) {
 
-                    $scope.makeOrderError = error.data.start_date;
+                    $scope.makeOrderError = error.data;
                     Flash.create('danger', $scope.makeOrderError, 'flash-message');
 
                 });
