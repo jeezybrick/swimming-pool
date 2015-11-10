@@ -97,24 +97,27 @@ function HomeController($scope, $timeout, AuthUser, Booking, MyBookings, Flash, 
     /**
      * Add order
      */
-    $scope.makeOrder = function (booking) {
+    $scope.makeOrder = function (index) {
 
 
         $scope.order = new MyBookings();
-        $scope.order.start_time = booking.time_start;
-        $scope.order.end_time = booking.time_end;
+        $scope.order.start_time =  $scope.booking[index].time_start;
+        $scope.order.end_time =  $scope.booking[index].time_end;
         $scope.order.start_date = $scope.selectedDate;
-        $scope.order.user = $scope.user.id;
 
         $scope.order.$save(function (response) {
 
-            booking.is_booked = true;
+            $scope.booking[index].is_booked = true;
 
             var myOtherModal = $modal({scope: $scope, templateUrl: 'static/partials/modals/approved_order_modal.html', show: false});
             $scope.showModal = function () {
                 myOtherModal.$promise.then(myOtherModal.show);
             };
-            $scope.showModal()
+            $scope.delayOnShowApproveModal = $timeout(function () {
+
+                $scope.showModal()
+
+            }, 300);
 
         }, function (error) {
 

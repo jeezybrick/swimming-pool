@@ -10,6 +10,7 @@ angular
         'ui.bootstrap',
         'ngAnimate',
         'ngResource',
+        'ngSanitize',
         'myApp.services',
         'flash',
         'mgcrea.ngStrap',
