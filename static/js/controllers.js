@@ -131,7 +131,7 @@ function HomeController($scope, $timeout, AuthUser, Booking, MyBookings, Flash, 
             $scope.defaultError = error.data;
             $scope.startTimeError = error.data.start_time;
             $scope.startDateError = error.data.start_date;
-            Flash.create('danger', $scope.defaultError || $scope.startTimeError || $scope.startDateError, 'flash-message');
+            Flash.create('danger', $scope.startTimeError || $scope.startDateError || $scope.defaultError, 'flash-message');
 
         });
 
@@ -213,7 +213,7 @@ function BookingsController($scope, $http, $location, $window, Flash, MyBookings
 
             $scope.defaultError = error.data;
             $scope.detailError = error.data.detail;
-            Flash.create('danger', $scope.detailError, 'flash-message');
+            Flash.create('danger', $scope.detailError || $scope.defaultError, 'flash-message');
         });
 
 

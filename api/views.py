@@ -43,6 +43,10 @@ class BookingList(APIView):
             # Save order if free line exists at this time
             if free_swim_lanes:
                 serializer.save(user=self.request.user, swim_lane=min(free_swim_lanes))
+                '''
+                send_mail('Subject here', 'Here is the message.', 'smooker14@gmail.com', ['smooker14@gmail.com'],
+                          fail_silently=False)
+                '''
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
             return Response('All lines booked at this time:(', status=status.HTTP_400_BAD_REQUEST)
 

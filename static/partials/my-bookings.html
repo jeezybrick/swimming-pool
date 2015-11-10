@@ -1,6 +1,6 @@
 
 <!-- preloader -->
-<div class="row" ng-hide="ordersLoad">
+<div class="row" ng-hide="ordersLoad || !user.is_auth">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" style="margin-top: 80px;">
         <div layout="row" layout-align="space-around">
             <md-progress-circular md-mode="indeterminate"></md-progress-circular>
