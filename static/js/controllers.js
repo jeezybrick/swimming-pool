@@ -6,10 +6,11 @@ angular
     .module('myApp')
     .controller('HomeController', HomeController);
 
-function HomeController($scope, $timeout, AuthUser, Booking, MyBookings, Flash, $auth) {
+function HomeController($scope, $timeout, AuthUser, Booking, MyBookings, Flash, $auth, $modal) {
     $scope.selectedDate = false;
     $scope.bookingLoad = false;
     $scope.title = 'SignUp';
+    $scope.makeOrderModalQuestion = "Do you wan't to make the order?";
 
     var date = new Date();
     var d = date.getDate();
@@ -108,6 +109,12 @@ function HomeController($scope, $timeout, AuthUser, Booking, MyBookings, Flash, 
         $scope.order.$save(function (response) {
 
             booking.is_booked = true;
+
+            var myOtherModal = $modal({scope: $scope, templateUrl: 'static/partials/modals/approved_order_modal.html', show: false});
+            $scope.showModal = function () {
+                myOtherModal.$promise.then(myOtherModal.show);
+            };
+            $scope.showModal()
 
         }, function (error) {
 
