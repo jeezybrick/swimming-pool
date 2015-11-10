@@ -3,6 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 from rest_framework import serializers
 from my_auth.models import OAuthUser
 from booking.models import Booking, BookingTimeStep
+from api.utils import get_free_swim_lanes
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -35,8 +36,15 @@ class BookingTimeStepSerializer(serializers.ModelSerializer):
 
     def get_is_booked(self, obj):
         request = self.context.get('request', None)
-        date = self.context.get('date', None)
-        return Booking.objects.filter(start_time=obj.time_start, user=request.user, start_date=date).exists()
+        start_time = obj.time_start
+        start_date = self.context.get('date', None)
+
+        # return set of free's swim lanes
+        free_swim_lanes = get_free_swim_lanes(start_time, start_date)
+        if not free_swim_lanes:
+            return True
+
+        return Booking.objects.filter(start_time=obj.time_start, user=request.user, start_date=start_date).exists()
 
     class Meta:
         model = BookingTimeStep

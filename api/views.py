@@ -11,7 +11,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 
 from booking.models import Booking, BookingTimeStep
-from api import serializers
+from api import serializers, utils, validators
 from api.permissions import IsAuthorOrReadOnly
 from my_auth.models import OAuthUser
 
@@ -36,15 +36,14 @@ class BookingList(APIView):
         serializer = serializers.BookingSerializer(data=request.data)
         if serializer.is_valid():
 
-            # automatic choose line in specific time
-            orders = Booking.objects.filter(start_time=request.data['start_time'], start_date=request.data['start_date'])
-            swim_lanes_default = [1, 2, 3, 4, 5, 6]
-            swim_lanes_on_orders = [order.swim_lane for order in orders]
-            result = set(swim_lanes_default) - set(swim_lanes_on_orders)
-            if result:
-                serializer.save(user=self.request.user, swim_lane=min(result))
+            # return set of free's swim lanes
+            free_swim_lanes = utils.get_free_swim_lanes(request.data['start_time'], request.data['start_date'])
+
+            # Save order if free line exists at this time
+            if free_swim_lanes:
+                serializer.save(user=self.request.user, swim_lane=min(free_swim_lanes))
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
-            return Response('All lines booked in this time:(', status=status.HTTP_400_BAD_REQUEST)
+            return Response('All lines booked at this time:(', status=status.HTTP_400_BAD_REQUEST)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -123,6 +122,7 @@ class CurrentUserDetail(generics.GenericAPIView):
         mem_id = request.data['mem_id']
         if request.user.is_banned:
             return Response('You banned ;(', status=status.HTTP_403_FORBIDDEN)
+        # validators.validate_input_member_id(request, mem_id)
         with open('mem_id.csv') as mem_id_list:
             data = csv.reader(mem_id_list)
             for row in data:

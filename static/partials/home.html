@@ -2,7 +2,7 @@
 
     <div class="calendar-block col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center"
          ng-if="isUserAuth() && isUserActive()">
-        <div ui-calendar="uiConfig.calendar" ng-model="booking"></div>
+        <div ui-calendar="uiConfig.calendar" ng-model="booking" calendar="myCalendar"></div>
     </div>
     <!-- preloader -->
     <div class="row" ng-hide="bookingLoad || !isUserAuth() || !isUserActive()">

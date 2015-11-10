@@ -33,6 +33,7 @@ function HomeController($scope, $timeout, AuthUser, Booking, MyBookings, Flash, 
 
         $scope.alertMessage = (date.format() + ' was clicked ');
         $scope.selectedDate = date.format();
+        $scope.test = moment($scope.selectedDate).format('YYYY-MM-DD');
 
         $scope.booking = Booking.query(params = {date: $scope.selectedDate},function () {
 
@@ -63,7 +64,8 @@ function HomeController($scope, $timeout, AuthUser, Booking, MyBookings, Flash, 
             dayClick: $scope.alertOnEventClick,
             eventDrop: $scope.alertOnDrop,
             eventResize: $scope.alertOnResize,
-            //defaultView: 'basicWeek'
+            //defaultView: 'basicWeek',
+            defaultDate: $scope.test
         }
     };
 
