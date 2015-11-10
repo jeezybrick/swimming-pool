@@ -1,10 +1,17 @@
 
 <div ng-cloak class="wrapper-form col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" ng-show="user.is_banned">
+            <p class="bg-danger">You lose access to the app until [[ user.banned_to | date:'MMM d' ]]</p>
+        </div>
+    </div>
+
     <!-- postloader -->
     <div layout="row" layout-align="space-around" ng-show="loginProcess">
         <md-progress-circular md-mode="indeterminate"></md-progress-circular>
     </div>
+
 
     <!-- form for login-->
     <form name="loginForm" class="form-horizontal action_add" role="form" method="POST">

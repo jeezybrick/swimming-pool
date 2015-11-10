@@ -150,6 +150,8 @@
           username: "{{ user.username|default:''}}",
           fullname: "{{ user.fullname|default:'' }}",
           is_auth: "{{ user.is_auth|default:'' }}",
+          is_banned: "{{ user.is_banned|default:'' }}",
+          banned_to: "{{ user.banned_to|default:'' }}",
         }
       });
 </script>

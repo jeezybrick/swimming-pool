@@ -128,8 +128,10 @@ function HomeController($scope, $timeout, AuthUser, Booking, MyBookings, Flash, 
 
         }, function (error) {
 
-            $scope.makeOrderError = error.data;
-            Flash.create('danger', $scope.makeOrderError, 'flash-message');
+            $scope.defaultError = error.data;
+            $scope.startTimeError = error.data.start_time;
+            $scope.startDateError = error.data.start_date;
+            Flash.create('danger', $scope.defaultError || $scope.startTimeError || $scope.startDateError, 'flash-message');
 
         });
 
@@ -208,7 +210,10 @@ function BookingsController($scope, $http, $location, $window, Flash, MyBookings
             $scope.bookings.splice(index, 1);
 
         }, function(error){
-            Flash.create('danger', error.data.detail, 'flash-message');
+
+            $scope.defaultError = error.data;
+            $scope.detailError = error.data.detail;
+            Flash.create('danger', $scope.detailError, 'flash-message');
         });
 
 
