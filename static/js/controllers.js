@@ -98,28 +98,21 @@ function HomeController($scope, $timeout, AuthUser, Booking, MyBookings, Flash, 
      */
     $scope.makeOrder = function (booking) {
 
-        bootbox.confirm("Do you wan't to make the order?", function (answer) {
 
-            if (answer === true) {
+        $scope.order = new MyBookings();
+        $scope.order.start_time = booking.time_start;
+        $scope.order.end_time = booking.time_end;
+        $scope.order.start_date = $scope.selectedDate;
+        $scope.order.user = $scope.user.id;
 
-                $scope.order = new MyBookings();
-                $scope.order.start_time = booking.time_start;
-                $scope.order.end_time = booking.time_end;
-                $scope.order.start_date = $scope.selectedDate;
-                $scope.order.user = $scope.user.id;
+        $scope.order.$save(function (response) {
 
-                $scope.order.$save(function (response) {
+            booking.is_booked = true;
 
-                    bootbox.alert('Approved');
-                    booking.is_booked = true;
+        }, function (error) {
 
-                }, function (error) {
-
-                    $scope.makeOrderError = error.data;
-                    Flash.create('danger', $scope.makeOrderError, 'flash-message');
-
-                });
-            }
+            $scope.makeOrderError = error.data;
+            Flash.create('danger', $scope.makeOrderError, 'flash-message');
 
         });
 

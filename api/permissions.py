@@ -1,3 +1,4 @@
+from django.utils.translation import ugettext_lazy as _
 from rest_framework import permissions
 from api.utils import is_safe_method
 
@@ -8,3 +9,13 @@ from api.utils import is_safe_method
 class IsAuthorOrReadOnly(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         return True if is_safe_method(request) else obj.user == request.user
+
+
+class IsActiveOrReadOnly(permissions.BasePermission):
+    # message = _("You don't input member_id yet")
+
+    def has_object_permission(self, request, view, obj):
+        return True if is_safe_method(request) else request.user.is_auth
+
+    def has_permission(self, request, view):
+        return True if is_safe_method(request) else request.user.is_auth

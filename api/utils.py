@@ -11,7 +11,7 @@ def is_safe_method(request):
 # return set of swim lanes
 def get_free_swim_lanes(start_time, start_date):
     swim_lanes_default = [1, 2, 3, 4, 5, 6]  # Six swim lanes
-    orders = Booking.objects.filter(start_time=start_time, start_date=start_date)
-    swim_lanes_on_orders = [order.swim_lane for order in orders]
-    free_swim_lanes = set(swim_lanes_default) - set(swim_lanes_on_orders)
+    orders = Booking.objects.filter(start_time=start_time, start_date=start_date)  # get booked swim lines
+    swim_lanes_on_orders = [order.swim_lane for order in orders]  # get list of booked swim lines
+    free_swim_lanes = set(swim_lanes_default) - set(swim_lanes_on_orders)  # get set of free swim lines
     return free_swim_lanes
