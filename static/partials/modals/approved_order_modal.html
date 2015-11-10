@@ -3,16 +3,16 @@
     <div class="modal-content">
       <div class="modal-header text-center" ng-show="title">
         <button type="button" class="close" ng-click="$hide()">&times;</button>
-        <h4 class="modal-title" ng-bind-html="title">Approved</h4>
+        <h2 class="modal-title" ng-bind-html="title">Approved</h2>
       </div>
       <div class="modal-body text-center">
-          
+
         <h2><small>[[ order.start_date | date:'dd.MM' ]], [[ order.start_time ]] - [[ order.end_time ]]</small></h2>
         <h2><small>Lane [[ order.swim_lane ]]</small></h2>
 
       </div>
       <div class="modal-footer text-center">
-        <button type="button" class="btn btn-default" ng-click="$hide()">OK</button>
+        <button type="button" class="btn btn-default btn-lg" ng-click="$hide()">OK</button>
       </div>
     </div>
   </div>

@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import csv
-from django.utils.datastructures import MultiValueDictKeyError
 from rest_framework import status
 from rest_framework.response import Response
 from api import serializers

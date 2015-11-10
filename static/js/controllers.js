@@ -180,6 +180,7 @@ function BookingsController($scope, $http, $location, $window, Flash, MyBookings
     $scope.currentDate = moment(date).format('MMMM ' + 'YYYY');
     $scope.ordersLoad = false;
     $scope.user = AuthUser;
+    $scope.deleteOrderModalQuestion = "Do you wan't to delete this order?";
 
     $scope.bookings = MyBookings.query(function () {
 
@@ -191,18 +192,13 @@ function BookingsController($scope, $http, $location, $window, Flash, MyBookings
 
     $scope.removeOrder = function (index) {
 
-        bootbox.confirm('Are you sure you want to delete this order?', function (answer) {
 
-            if (answer === true) {
-                MyBookings.delete({id: $scope.bookings[index].id}, function () {
+        MyBookings.delete({id: $scope.bookings[index].id}, function () {
 
-                    $scope.bookings.splice(index, 1);
-
-                });
-            }
-
+            $scope.bookings.splice(index, 1);
 
         });
+
 
     };
 
