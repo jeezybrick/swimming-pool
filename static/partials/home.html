@@ -28,7 +28,7 @@
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
                                 <h5>[[ selectedDate | date:'MMM d' ]]</h5>
-                                <h4><strong>[[ booking.time_start ]] - [[ booking.time_end ]]</strong></h4>
+                                <h4><strong>[[ booking.time_start | limitTo:5 ]] - [[ booking.time_end | limitTo:5 ]]</strong></h4>
                             </div>
                         </div>
 

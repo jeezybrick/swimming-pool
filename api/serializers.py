@@ -29,6 +29,19 @@ class BookingSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError(_("5 days from now is max!"))
         return start_date
 
+    def validate_start_time(self, start_time):
+        minutes = start_time.strftime('%M')
+        seconds = start_time.strftime('%S')
+        interval_in_minutes = '30'  # step in time eg 11:30..12:00
+
+        if not minutes == '00' and not minutes == interval_in_minutes:
+            raise serializers.ValidationError(_("Invalid minutes in time"))
+
+        if seconds != '00':
+            raise serializers.ValidationError(_("Invalid seconds in time"))
+
+        return start_time
+
 
 class BookingTimeStepSerializer(serializers.ModelSerializer):
 

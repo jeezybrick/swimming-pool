@@ -109,7 +109,14 @@ function HomeController($scope, $timeout, AuthUser, Booking, MyBookings, Flash, 
 
             $scope.booking[index].is_booked = true;
 
-            var myOtherModal = $modal({scope: $scope, templateUrl: 'static/partials/modals/approved_order_modal.html', show: false});
+            // Approved order modal
+            var myOtherModal = $modal({
+                scope: $scope,
+                templateUrl: 'static/partials/modals/approved_order_modal.html',
+                show: false,
+                placement: 'center',
+                animation:'am-fade-and-scale'
+            });
             $scope.showModal = function () {
                 myOtherModal.$promise.then(myOtherModal.show);
             };
@@ -117,7 +124,7 @@ function HomeController($scope, $timeout, AuthUser, Booking, MyBookings, Flash, 
 
                 $scope.showModal()
 
-            }, 300);
+            }, 250);
 
         }, function (error) {
 
@@ -200,6 +207,8 @@ function BookingsController($scope, $http, $location, $window, Flash, MyBookings
 
             $scope.bookings.splice(index, 1);
 
+        }, function(error){
+            Flash.create('danger', error.data.detail, 'flash-message');
         });
 
 
