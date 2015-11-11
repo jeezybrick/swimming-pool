@@ -9,10 +9,13 @@ from api.utils import get_free_swim_lanes
 class UserSerializer(serializers.ModelSerializer):
 
     fullname = serializers.CharField(required=True, max_length=50)
+    is_auth = serializers.BooleanField(read_only=True)
+    banned_to = serializers.DateTimeField(read_only=True)
+    is_banned = serializers.BooleanField(read_only=True)
 
     class Meta:
         model = OAuthUser
-        fields = ('fullname', )
+        fields = ('id', 'fullname', 'banned_to', 'is_auth', 'is_banned', )
 
 
 class BookingSerializer(serializers.ModelSerializer):

@@ -1,0 +1,33 @@
+<div class="top-nav text-center" ng-cloak>
+    [[ title ]]
+</div>
+
+<div class="row">
+    <div class="auth-block col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="starter-template">
+            <p class="lead animated zoomIn">
+
+            <h2 class="main-greet animated fadeInUp">
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                    <div layout="row" layout-align="space-around" ng-if="signInProcess">
+                        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                    </div>
+
+                    <md-button class="sign-btn md-raised md-primary" href="/login/google-oauth2/" target="_self"
+                               ng-click="signInProcess=true">
+                        Sign in with Google
+                    </md-button>
+                </div>
+
+            </h2>
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- Flash error messages -->
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+    <div flash-message="4000"></div>
+</div>

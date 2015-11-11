@@ -63,22 +63,8 @@
     </div>
 {% endif %}
 
-{% if not user.is_authenticated or not user.is_auth %}
-    <div ng-controller="AuthController">
 
-        <!-- Navbar -->
-       {% include 'partials/my_nav.html' %}
-    </div>
-{% endif %}
-
-{% if user.is_authenticated and not user.is_auth %}
-    <div ng-controller="LoginCtrl">
-        <!-- Navbar -->
-       {% include 'partials/login.html' %}
-    </div>
-{% endif %}
-
-<div class="container-fluid main-content">
+<div>
 
     <div ui-view></div>
 
@@ -139,22 +125,6 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/Base64/0.3.0/base64.min.js"></script>
 <![endif]-->
 <script src="//cdn.jsdelivr.net/satellizer/0.13.0/satellizer.min.js"></script>
-
-<script>
-  // This allows you to access the current user id in your angular controllers.
-  angular
-      .module('myApp.services')
-      .factory('AuthUser', function() {
-        return {
-          id: "{{ user.id|default:''}}",
-          username: "{{ user.username|default:''}}",
-          fullname: "{{ user.fullname|default:'' }}",
-          is_auth: "{{ user.is_auth|default:'' }}",
-          is_banned: "{{ user.is_banned|default:'' }}",
-          banned_to: "{{ user.banned_to|default:'' }}",
-        }
-      });
-</script>
 
 
 </body>

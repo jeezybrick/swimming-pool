@@ -22,7 +22,12 @@
     margin-left: auto;
     width: 40%;
 }
-
+.auth-block{
+    margin-top: 150px;
+}
+.wrapper{
+    margin-top: 80px;
+}
 .wrapper-form {
     text-align: center;
     margin-top: 150px;

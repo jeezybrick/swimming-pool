@@ -11,5 +11,13 @@ angular.module('myApp.services', ['ngResource'])
 
     .factory('MyBookings', function ($resource) {
         return $resource('/api/booking/:id/');
+    })
+    .factory('AuthUser', function ($resource) {
+        return $resource('/api/user/:id/'
+        , {id: '@id'}, {
+            'update': {method: 'PUT'},
+            'get': {method: 'GET'},
+            'query': {method: 'GET', isArray: false}
+        });
     });
 

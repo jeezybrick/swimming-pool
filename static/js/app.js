@@ -52,6 +52,11 @@ angular
         // Routing
         $urlRouterProvider.otherwise('/');
         $stateProvider
+            .state('auth', {
+                url: '/auth/',
+                templateUrl: '/static/partials/my_auth/auth.html',
+                controller: 'AuthController'
+            })
             .state('auth-login', {
                 url: '/login/',
                 templateUrl: '/static/partials/my_auth/login.html',
