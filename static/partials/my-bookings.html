@@ -1,6 +1,5 @@
-
 <!-- preloader -->
-<div class="row" ng-hide="ordersLoad || !user.is_auth">
+<div class="row" ng-hide="ordersLoad || !isUserActive()">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" style="margin-top: 80px;">
         <div layout="row" layout-align="space-around">
             <md-progress-circular md-mode="indeterminate"></md-progress-circular>
@@ -9,7 +8,11 @@
 </div>
 
 
-<div ng-cloak class="wrapper col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top: 80px;" ng-if="ordersLoad && user.is_auth">
+<div ng-cloak class="wrapper col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top: 80px;"
+     ng-if="ordersLoad && isUserActive()">
+    <div class="top-nav-reverse text-center" ng-cloak>
+        <strong>[[ dateNow ]]</strong>
+    </div>
 
     <hr>
     <h1>
@@ -28,7 +31,8 @@
                         </div>
 
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <h4><strong>[[ booking.start_time | limitTo:5 ]] - [[ booking.end_time | limitTo:5 ]]</strong></h4>
+                            <h4><strong>[[ booking.start_time | limitTo:5 ]] - [[ booking.end_time | limitTo:5
+                                ]]</strong></h4>
                         </div>
 
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -39,7 +43,7 @@
 
                 <div class="cancel-order-block col-lg-6 col-md-6 col-sm-6 col-xs-3 text-right">
                     <a href="javascript:void(0);" data-animation="am-fade-and-slide-top" data-placement="center"
-                                   data-template-url="static/partials/modals/delete_order_modal.html" bs-modal="modal">
+                       data-template-url="static/partials/modals/delete_order_modal.html" bs-modal="modal">
                         <i class="fa fa-times-circle fa-3x"></i>
                     </a>
                 </div>

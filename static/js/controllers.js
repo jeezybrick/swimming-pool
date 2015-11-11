@@ -24,6 +24,7 @@ function HomeController($scope, $timeout, AuthUser, Booking, MyBookings, Flash, 
     $scope.startPageLoad = false;
     $scope.bookingLoad = false;
     $scope.addOrderMessageSuccess = 'Approved!';
+    $scope.dateNow = moment(date).format('MMMM YYYY');
     $scope.dates.push(moment(date).format('YYYY-MM-DD'));
 
     $scope.selectedDate = moment(date).format('YYYY-MM-DD');
@@ -151,8 +152,16 @@ function HomeController($scope, $timeout, AuthUser, Booking, MyBookings, Flash, 
         $auth.authenticate(provider);
     };
 
-    $scope.setSelectedDate = function (date) {
+    $scope.getOrdersBySelectedDate = function (date) {
         $scope.selectedDate = date;
+
+        $scope.booking = Booking.query(params = {date: $scope.selectedDate},function () {
+
+            $scope.bookingLoad = true;
+
+        }, function () {
+            $scope.bookingLoadError = true;
+        });
     };
 
     $scope.select= function(index) {
@@ -210,31 +219,44 @@ function BookingsController($scope, $http, $location, $window, Flash, MyBookings
     $scope.ordersLoad = false;
     $scope.user = AuthUser;
     $scope.deleteOrderModalQuestion = "Do you wan't to delete this order?";
+    $scope.dateNow = moment(date).format('MMMM YYYY');
 
-    $scope.bookings = MyBookings.query(function () {
+    $scope.isUserActive = function () {
 
-        $scope.ordersLoad = true;
+        return $scope.user.is_auth;
+    };
 
-    }, function () {
-        $scope.bookingsLoadError = true;
-    });
+    if ($scope.isUserActive()) {
 
-    $scope.removeOrder = function (index) {
+        $scope.bookings = MyBookings.query(function () {
 
+            $scope.ordersLoad = true;
 
-        MyBookings.delete({id: $scope.bookings[index].id}, function () {
-
-            $scope.bookings.splice(index, 1);
-
-        }, function(error){
-
-            $scope.defaultError = error.data;
-            $scope.detailError = error.data.detail;
-            Flash.create('danger', $scope.detailError || $scope.defaultError, 'flash-message');
+        }, function () {
+            $scope.bookingsLoadError = true;
         });
 
+        $scope.removeOrder = function (index) {
 
-    };
+
+            MyBookings.delete({id: $scope.bookings[index].id}, function () {
+
+                $scope.bookings.splice(index, 1);
+
+            }, function (error) {
+
+                $scope.defaultError = error.data;
+                $scope.detailError = error.data.detail;
+                Flash.create('danger', $scope.detailError || $scope.defaultError, 'flash-message');
+            });
+
+
+        };
+
+    } else {
+
+        $location.path('/');
+    }
 
 
 }

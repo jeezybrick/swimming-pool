@@ -1,8 +1,13 @@
+
 <div class="row home">
 
     <div class="calendar-block col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center"
          ng-if="isUserAuth() && isUserActive()">
         <!-- <div ui-calendar="uiConfig.calendar" ng-model="booking" calendar="myCalendar"></div> -->
+
+        <div class="top-nav-reverse text-center" ng-cloak>
+            <strong>[[ dateNow ]]</strong>
+        </div>
 
         <table class="date-table table">
             <thead>
@@ -14,7 +19,7 @@
             </thead>
             <tbody>
             <tr>
-                <td ng-repeat="date in dates" ng-click="setSelectedDate(date);select($index)" ng-class="{active: $index == selected}">
+                <td ng-repeat="date in dates" ng-click="getOrdersBySelectedDate(date);select($index)" ng-class="{active: $index == selected}">
                     [[ date | date: 'd']]
                 </td>
             </tr>

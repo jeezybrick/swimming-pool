@@ -8,6 +8,21 @@
     text-transform: uppercase;
 }
 
+.top-nav-reverse {
+    position: fixed;
+    top: 0;
+    background-color: transparent;
+    color: white;
+    text-transform: uppercase;
+    z-index: 99999;
+    margin-top: 15px;
+     right: 0;
+    left: 0;
+    margin-right: auto;
+    margin-left: auto;
+    width: 40%;
+}
+
 .wrapper-form {
     text-align: center;
     margin-top: 150px;
