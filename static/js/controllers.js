@@ -129,9 +129,10 @@ function HomeController($scope, $timeout, AuthUser, Booking, MyBookings, Flash, 
         }, function (error) {
 
             $scope.defaultError = error.data;
+            $scope.detailError = error.data.detail;
             $scope.startTimeError = error.data.start_time;
             $scope.startDateError = error.data.start_date;
-            Flash.create('danger', $scope.startTimeError || $scope.startDateError || $scope.defaultError, 'flash-message');
+            Flash.create('danger', $scope.startTimeError || $scope.startDateError || $scope.detailError || $scope.defaultError, 'flash-message');
 
         });
 

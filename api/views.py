@@ -90,7 +90,7 @@ class BookingDetail(APIView):
 class BookingTimeStepList(generics.GenericAPIView):
     serializer_class = serializers.BookingTimeStepSerializer
     queryset = BookingTimeStep.objects.all()
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.IsAuthenticated, )
 
     def get(self, request):
         queryset = BookingTimeStep.objects.all()
@@ -137,7 +137,7 @@ class CurrentUserDetail(generics.GenericAPIView):
                     if str(mem_id) == fields:
                         serializer = serializers.UserSerializer(data=request.data, instance=request.user)
                         if serializer.is_valid():
-                            serializer.save(is_auth=True)
+                            serializer.save(is_auth=True, member_id=mem_id)
                             return Response('You on!', status=status.HTTP_202_ACCEPTED)
                         return Response('Username is required field', status=status.HTTP_400_BAD_REQUEST)
 

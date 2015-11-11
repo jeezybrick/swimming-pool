@@ -21,7 +21,7 @@ class OAuthUser(AbstractBaseUser):
     fullname = models.CharField(max_length=50, blank=True)
     username = models.CharField(max_length=30)
     email = models.EmailField(unique=True)
-    member_id = models.CharField(max_length=50, blank=True)
+    member_id = models.CharField(max_length=50, default='')
     banned_to = models.DateTimeField(null=True)
     attempt_to_ban = models.IntegerField(default=0)
     is_auth = models.BooleanField(default=False)

@@ -2,7 +2,49 @@
 
     <div class="calendar-block col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center"
          ng-if="isUserAuth() && isUserActive()">
-        <div ui-calendar="uiConfig.calendar" ng-model="booking" calendar="myCalendar"></div>
+        <!-- <div ui-calendar="uiConfig.calendar" ng-model="booking" calendar="myCalendar"></div> -->
+
+        <table class="date-table table">
+            <thead>
+            <tr>
+                <th>
+                    Mon
+                </th>
+                <th>
+                    Tue
+                </th>
+
+                <th>
+                    Wed
+                </th>
+                <th>
+                    Thu
+                </th>
+                <th>
+                    Fri
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    1
+                </td>
+                <td>
+                    2
+                </td>
+                <td class="active">
+                    3
+                </td>
+                <td>
+                   4
+                </td>
+                <td>
+                    5
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
     <!-- preloader -->
     <div class="row" ng-hide="bookingLoad || !isUserAuth() || !isUserActive()">
