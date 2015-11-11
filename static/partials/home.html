@@ -14,7 +14,7 @@
             </thead>
             <tbody>
             <tr>
-                <td ng-repeat="date in dates" ng-click="setSelectedDate(date)">
+                <td ng-repeat="date in dates" ng-click="setSelectedDate(date);select($index)" ng-class="{active: $index == selected}">
                     [[ date | date: 'd']]
                 </td>
             </tr>

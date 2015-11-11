@@ -11,6 +11,7 @@ function HomeController($scope, $timeout, AuthUser, Booking, MyBookings, Flash, 
     $scope.bookingLoad = false;
     $scope.title = 'SignUp';
     $scope.makeOrderModalQuestion = "Do you wan't to make the order?";
+    $scope.selected = 0;
 
     var date = new Date();
     var d = date.getDate();
@@ -152,6 +153,10 @@ function HomeController($scope, $timeout, AuthUser, Booking, MyBookings, Flash, 
 
     $scope.setSelectedDate = function (date) {
         $scope.selectedDate = date;
+    };
+
+    $scope.select= function(index) {
+       $scope.selected = index;
     };
 }
 
