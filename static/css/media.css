@@ -57,6 +57,11 @@
         width: 60%;
     }
 
+    .order-time-step {
+        padding: 20px;
+        height: 100px;
+    }
+
 }
 
 /* Portrait phones and smaller */

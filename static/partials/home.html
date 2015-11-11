@@ -7,44 +7,20 @@
         <table class="date-table table">
             <thead>
             <tr>
-                <th>
-                    Mon
-                </th>
-                <th>
-                    Tue
-                </th>
-
-                <th>
-                    Wed
-                </th>
-                <th>
-                    Thu
-                </th>
-                <th>
-                    Fri
+                <th ng-repeat="date in dates">
+                    [[ date | date: 'EEE' ]]
                 </th>
             </tr>
             </thead>
             <tbody>
             <tr>
-                <td>
-                    1
-                </td>
-                <td>
-                    2
-                </td>
-                <td class="active">
-                    3
-                </td>
-                <td>
-                   4
-                </td>
-                <td>
-                    5
+                <td ng-repeat="date in dates" ng-click="setSelectedDate(date)">
+                    [[ date | date: 'd']]
                 </td>
             </tr>
             </tbody>
         </table>
+
     </div>
     <!-- preloader -->
     <div class="row" ng-hide="bookingLoad || !isUserAuth() || !isUserActive()">

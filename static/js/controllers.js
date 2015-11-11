@@ -16,12 +16,19 @@ function HomeController($scope, $timeout, AuthUser, Booking, MyBookings, Flash, 
     var d = date.getDate();
     var m = date.getMonth();
     var y = date.getFullYear();
+    var i;
+    $scope.dates = [];
 
     $scope.user = AuthUser; // Auth user object
     $scope.startPageLoad = false;
     $scope.bookingLoad = false;
     $scope.addOrderMessageSuccess = 'Approved!';
+    $scope.dates.push(moment(date).format('YYYY-MM-DD'));
+
     $scope.selectedDate = moment(date).format('YYYY-MM-DD');
+    for (i=1;i<5;i++){
+        $scope.dates.push(moment(date).add(i, 'days').format('YYYY-MM-DD'));
+    }
 
     $scope.delay = $timeout(function () {
 
@@ -141,6 +148,10 @@ function HomeController($scope, $timeout, AuthUser, Booking, MyBookings, Flash, 
 
     $scope.authenticate = function(provider) {
         $auth.authenticate(provider);
+    };
+
+    $scope.setSelectedDate = function (date) {
+        $scope.selectedDate = date;
     };
 }
 

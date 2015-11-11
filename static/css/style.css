@@ -61,7 +61,7 @@
 }
 
 .order-time-step {
-    border-bottom: solid 1px #ddd;
+    border: solid 1px #ddd;
     padding: 30px;
     height: 160px;
 }
