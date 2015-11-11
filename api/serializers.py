@@ -27,6 +27,9 @@ class BookingSerializer(serializers.ModelSerializer):
     def validate_start_date(self, start_date):
         if (start_date - datetime.datetime.now().date()).total_seconds() > self.maxDaysToOrder:
             raise serializers.ValidationError(_("5 days from now is max!"))
+
+        if start_date < datetime.datetime.now().date():
+            raise serializers.ValidationError(_("You try order past date"))
         return start_date
 
     def validate_start_time(self, start_time):

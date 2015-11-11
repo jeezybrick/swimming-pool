@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
 
     # my apps
+    'core',
     'my_auth',
     'booking',
     'api',
@@ -192,15 +193,5 @@ SOCIAL_AUTH_PIPELINE = (
     'social.pipeline.user.user_details'
 )
 
-# Cache
-CACHES = {
-    "default": {
-        "BACKEND": "redis_cache.cache.RedisCache",
-        "LOCATION": "127.0.0.1:6379",
-        "OPTIONS": {
-            "CLIENT_CLASS": "redis_cache.client.DefaultClient",
-        }
-    }
-}
 
 CELERY_ALWAYS_EAGER = True
