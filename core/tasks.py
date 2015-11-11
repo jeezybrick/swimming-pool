@@ -14,3 +14,11 @@ def unblock_user():
         user.banned_to = None
         user.attempt_to_ban = 0
         user.save()
+
+
+# periodic task for checking if member id is exists in .csv file
+@periodic_task(run_every=30)  # run every hour
+def check_if_member_id_exist():
+    users = OAuthUser.objects.all()
+    for user in users:
+        user.save()
