@@ -1,5 +1,7 @@
 import datetime
 import csv
+from django.core.mail import send_mail
+from django.utils import timezone
 from celery.task import periodic_task
 from booking.models import Booking
 from my_auth.models import OAuthUser
@@ -15,6 +17,18 @@ def unblock_user():
         user.banned_to = None
         user.attempt_to_ban = 0
         user.save()
+
+
+# periodic task for sending reminder email with order data
+@periodic_task(run_every=60 * 60)  # run every hour
+def send_remind_email():
+    orders = Booking.objects.filter(start_date__lt=datetime.datetime.now().date() + datetime.timedelta(days=1))
+    for order in orders:
+        email_subject = 'Subject here'
+        email_message = order.start_date
+        user_email = order.user.email
+        send_mail(email_subject, email_message, 'smooker14@gmail.com', [user_email], fail_silently=False)
+
 
 '''
 # periodic task for checking if member id is exists in .csv file

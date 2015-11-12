@@ -1,11 +1,7 @@
-import csv
 from django.utils import timezone
-from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect
-from django.shortcuts import redirect
 from django.core.mail import send_mail
+from django.utils.translation import ugettext_lazy as _
 from django.http import Http404
-from django.utils.datastructures import MultiValueDictKeyError
 from rest_framework import generics, status, permissions
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.views import APIView
@@ -34,6 +30,9 @@ class BookingList(APIView):
         return Response(serializer.data)
 
     def post(self, request):
+
+        no_free_swim_lanes_text = _('All lines booked at this time:(')
+
         serializer = serializers.BookingSerializer(data=request.data)
         if serializer.is_valid():
 
@@ -48,7 +47,7 @@ class BookingList(APIView):
                           fail_silently=False)
                 '''
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
-            return Response('All lines booked at this time:(', status=status.HTTP_400_BAD_REQUEST)
+            return Response(no_free_swim_lanes_text, status=status.HTTP_400_BAD_REQUEST)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -119,25 +118,9 @@ class CurrentUserDetail(generics.GenericAPIView):
 
     def post(self, request):
 
+        ban_text = _('You have been banned ;(')
+
         if request.user.is_banned:
-            return Response('You banned ;(', status=status.HTTP_403_FORBIDDEN)
+            return Response(ban_text, status=status.HTTP_403_FORBIDDEN)
 
-        try:
-            request.data['mem_id']
-        except KeyError:
-            return Response('Please, input your member id', status=status.HTTP_400_BAD_REQUEST)
-
-        mem_id = request.data['mem_id']
-        # validators.validate_input_member_id(request)
-        with open('mem_id.csv') as mem_id_list:
-            data = csv.reader(mem_id_list)
-            for row in data:
-                for fields in row:
-                    if str(mem_id) == fields:
-                        serializer = serializers.UserSerializer(data=request.data, instance=request.user)
-                        if serializer.is_valid():
-                            serializer.save(is_auth=True, member_id=mem_id)
-                            return Response('You on!', status=status.HTTP_202_ACCEPTED)
-                        return Response('Username is required field', status=status.HTTP_400_BAD_REQUEST)
-
-        return Response('Wrong membership card id.', status=status.HTTP_403_FORBIDDEN)
+        return validators.validate_input_member_id(request)

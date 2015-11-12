@@ -4,7 +4,6 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from core.models import TimeStampedModel
 from my_auth.managers import CustomUserManager
-from django.contrib.auth.models import UserManager
 
 
 class OAuthUser(AbstractBaseUser, PermissionsMixin):
