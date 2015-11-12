@@ -6,9 +6,10 @@ angular
     .module('myApp')
     .controller('HomeController', HomeController);
 
-function HomeController($scope, $timeout, AuthUser, Booking, MyBookings, Flash, $modal, $location) {
+function HomeController($scope, $timeout, AuthUser, Booking, MyBookings, Flash, $modal, $location, $mdDialog) {
 
     $scope.bookingLoad = false;
+    $scope.pageLoad = false;
     $scope.makeOrderModalQuestion = "Do you wan't to make the order?";
     $scope.selected = 0; // select current day in calendar
 
@@ -119,6 +120,23 @@ function HomeController($scope, $timeout, AuthUser, Booking, MyBookings, Flash, 
     $scope.select = function (index) {
         $scope.selected = index;
     };
+
+    $scope.showConfirm = function(ev) {
+    // Appending dialog to document.body to cover sidenav in docs app
+    var confirm = $mdDialog.confirm()
+          .title('Are you sure?')
+          .content($scope.makeOrderModalQuestion)
+          .ariaLabel('Lucky day')
+          .targetEvent(ev)
+          .ok('Yes')
+          .cancel('No');
+    $mdDialog.show(confirm).then(function() {
+      $scope.status = 'You decided to get rid of your debt.';
+    }, function() {
+      $scope.status = 'You decided to keep your debt.';
+    });
+  };
+
 }
 
 
@@ -246,5 +264,18 @@ function AuthController($scope, $location, AuthUser) {
 
     });
 
+}
+
+angular
+    .module('myApp')
+    .controller('PageController', PageController);
+
+function PageController($scope) {
+
+    $scope.pageLoad = false;
+
+   angular.element(document).ready(function () {
+        $scope.pageLoad = true;
+    });
 
 }

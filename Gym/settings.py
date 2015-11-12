@@ -133,7 +133,7 @@ STATICFILES_DIRS = ('static', )
 
 
 # Default auth model
-AUTH_USER_MODEL = 'my_auth.MyUser'
+AUTH_USER_MODEL = 'my_auth.OAuthUser'
 
 # bootstrap3 for crispy forms
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
@@ -168,8 +168,10 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'Hwz3MmoURnU6CpT2h9ssMrQU'
 SOCIAL_AUTH_ADMIN_USER_SEARCH_FIELDS = ['username', 'email']
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 
+SOCIAL_AUTH_GOOGLE_OAUTH2_USE_DEPRECATED_API = True
+
 # Google OAuth2 (google-oauth2)
-SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = ['email', 'profile']
+SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = ['email', 'profile', 'https://www.googleapis.com/auth/calendar']
 
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
 

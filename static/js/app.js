@@ -17,14 +17,11 @@ angular
         'ngMaterial',
         'angular-loading-bar',
         'angular.filter',
-        'ngMessages',
-        'datePicker',
-        'satellizer'
-
+        'ngMessages'
 
     ])
     .config(function ($locationProvider, $httpProvider, $resourceProvider, $interpolateProvider, $routeProvider,
-                      $compileProvider, $stateProvider, $urlRouterProvider, $authProvider) {
+                      $compileProvider, $stateProvider, $urlRouterProvider) {
 
         // CSRF Support
         $httpProvider.defaults.xsrfCookieName = 'csrftoken';
@@ -41,12 +38,6 @@ angular
         // enable html5Mode for pushstate ('#'-less URLs)
         $locationProvider.html5Mode(true);
         $locationProvider.hashPrefix('!');
-
-        // google ath provider
-        $authProvider.google({
-            clientId: '498316320509-64nn07fvqn3a76o8bk72s2bimmgaa273.apps.googleusercontent.com',
-            redirectUri: 'http://127.0.0.1:8000/'
-        });
 
 
         // Routing

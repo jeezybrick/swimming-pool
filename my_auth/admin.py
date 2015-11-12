@@ -5,6 +5,6 @@ from my_auth.models import OAuthUser
 
 
 class UserAdmin(admin.ModelAdmin):
-    list_display = ("fullname", "username", "email", 'is_auth')
+    list_display = ("fullname", "email", 'is_auth', 'is_banned', 'banned_to')
 
 admin.site.register(OAuthUser, UserAdmin)

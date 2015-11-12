@@ -48,7 +48,8 @@
     </div>
 </nav>
 
-<div class="container-fluid">
+
+<div class="container-fluid" ng-cloak>
     <div class="row home">
 
     <div class="calendar-block col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
@@ -76,7 +77,12 @@
         </table>
 
     </div>
-    <!-- preloader -->
+
+<md-button class="md-primary md-raised" ng-click="showConfirm($event)" flex-sm="100" flex-md="100" flex-gt-md="auto">
+      Alert Dialog
+    </md-button>
+[[ status ]]
+    <!-- preloader for time list -->
     <div class="row" ng-hide="bookingLoad">
         <div class="wrapper col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center center-block">
             <div layout="row" layout-align="space-around">

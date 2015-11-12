@@ -38,7 +38,6 @@
 
     <!-- angular-calendar -->
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.4.0/fullcalendar.min.css">
-    <link rel="stylesheet" href="{%  static 'css/angular-datepicker.min.css' %}">
 
     <style>body {
     }
@@ -55,6 +54,17 @@
 </head>
 
 <body>
+
+{% comment %}<!-- preloader for page loading -->
+<div class="row" ng-controller="PageController">
+    <div class="page-preloader col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center center-block" ng-hide="pageLoad">
+        <div layout="row" layout-align="space-around">
+            <md-progress-circular class="md-accent md-hue-1" md-mode="indeterminate"
+                                  md-diameter="96"></md-progress-circular>
+        </div>
+    </div>
+</div>{% endcomment %}
+
 
 <div>
 
@@ -91,9 +101,6 @@
 <!-- angular-messages -->
 <script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.6/angular-messages.min.js'></script>
 
-<!-- Bootbox for modals -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
-
 <!-- Moment.js -->
 <script src="{% static 'js/moment.js' %}"></script>
 
@@ -110,13 +117,6 @@
 <!-- angular-calendar -->
 <script src="{% static 'js/calendar.js' %}"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.4.0/fullcalendar.min.js"></script>
-<script src="{% static 'js/angular-datepicker.min.js' %}"></script>
-
-<!-- Google auth angular -->
-<!--[if lte IE 9]>
-<script src="//cdnjs.cloudflare.com/ajax/libs/Base64/0.3.0/base64.min.js"></script>
-<![endif]-->
-<script src="//cdn.jsdelivr.net/satellizer/0.13.0/satellizer.min.js"></script>
 
 
 </body>

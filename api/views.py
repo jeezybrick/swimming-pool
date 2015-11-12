@@ -122,7 +122,6 @@ class CurrentUserDetail(generics.GenericAPIView):
         if request.user.is_banned:
             return Response('You banned ;(', status=status.HTTP_403_FORBIDDEN)
 
-
         try:
             request.data['mem_id']
         except KeyError:
