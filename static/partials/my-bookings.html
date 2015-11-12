@@ -7,9 +7,10 @@
     </div>
 </div>
 
-<nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
-    <div class="container-fluid">
-        <div class="navbar-header">
+<div class="my-booking-wrapper" ng-show="isUserAuth">
+    <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
                 <ul class="nav navbar-nav visible-xs pull-left">
                     <li ui-sref-active="active" id="user-on-nav-xs">
                         <a ui-sref="home">
@@ -25,22 +26,22 @@
                     </li>
 
                 </ul>
-        </div>
+            </div>
 
-        <div id="navbar" class="navbar-collapse collapse text-center">
-            <ul class="nav navbar-nav text-center">
-                <li ui-sref-active="active" id="cog-on-nav" class="hidden-xs">
+            <div id="navbar" class="navbar-collapse collapse text-center">
+                <ul class="nav navbar-nav text-center">
+                    <li ui-sref-active="active" id="cog-on-nav" class="hidden-xs">
                         <a ui-sref="home">
                             <i class="fa fa-calendar fa-3x"></i>
                         </a>
-                </li>
-                <li ui-sref-active="active" id="cog-on-nav" class="hidden-xs">
+                    </li>
+                    <li ui-sref-active="active" id="cog-on-nav" class="hidden-xs">
                         <a ui-sref="my-bookings">
                             <i class="fa fa-user fa-3x"></i>
                         </a>
-                </li>
+                    </li>
 
-            </ul>
+                </ul>
                 <!-- nav right -->
                 <ul class="nav navbar-nav navbar-right">
 
@@ -52,56 +53,57 @@
 
                 </ul>
 
+            </div>
+
+        </div>
+    </nav>
+
+    <div ng-cloak class="wrapper col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-if="ordersLoad">
+        <div class="top-nav-reverse text-center" ng-cloak>
+            <strong>[[ dateNow ]]</strong>
         </div>
 
-    </div>
-</nav>
+        <hr>
+        <h1>
+            <small>Your current orders</small>
+        </h1>
+        <h5 ng-hide="bookings.length">Orders doesn't make yet</h5>
+        <hr>
 
-<div ng-cloak class="wrapper col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-if="ordersLoad">
-    <div class="top-nav-reverse text-center" ng-cloak>
-        <strong>[[ dateNow ]]</strong>
-    </div>
+        <div class="row">
+            <div class="order-detail col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-repeat="booking in bookings">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-9">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <h4>[[ booking.start_date | date:'MMM d' ]]</h4>
+                            </div>
 
-    <hr>
-    <h1>
-        <small>Your current orders</small>
-    </h1>
-    <h5 ng-hide="bookings.length">Orders doesn't make yet</h5>
-    <hr>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <h4><strong>[[ booking.start_time | limitTo:5 ]] - [[ booking.end_time | limitTo:5
+                                    ]]</strong></h4>
+                            </div>
 
-    <div class="row">
-        <div class="order-detail col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-repeat="booking in bookings">
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-9">
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <h4>[[ booking.start_date | date:'MMM d' ]]</h4>
-                        </div>
-
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <h4><strong>[[ booking.start_time | limitTo:5 ]] - [[ booking.end_time | limitTo:5
-                                ]]</strong></h4>
-                        </div>
-
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <h4>Lane [[ booking.swim_lane ]]</h4>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <h4>Lane [[ booking.swim_lane ]]</h4>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="cancel-order-block col-lg-6 col-md-6 col-sm-6 col-xs-3 text-right">
-                    <a href="javascript:void(0);" data-animation="am-fade-and-slide-top" data-placement="center"
-                       data-template-url="static/partials/modals/delete_order_modal.html" bs-modal="modal">
-                        <i class="fa fa-times-circle fa-3x"></i>
-                    </a>
-                </div>
+                    <div class="cancel-order-block col-lg-6 col-md-6 col-sm-6 col-xs-3 text-right">
+                        <a href="javascript:void(0);" data-animation="am-fade-and-slide-top" data-placement="center"
+                           data-template-url="static/partials/modals/delete_order_modal.html" bs-modal="modal">
+                            <i class="fa fa-times-circle fa-3x"></i>
+                        </a>
+                    </div>
 
+                </div>
             </div>
         </div>
-    </div>
-    <!-- Flash error messages -->
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        <div flash-message="4000"></div>
-    </div>
+        <!-- Flash error messages -->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+            <div flash-message="4000"></div>
+        </div>
 
+    </div>
 </div>

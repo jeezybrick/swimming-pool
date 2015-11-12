@@ -1,6 +1,8 @@
-<nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
-    <div class="container-fluid">
-        <div class="navbar-header">
+<div class="home-wrapper" ng-show="isUserAuth">
+
+    <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
                 <ul class="nav navbar-nav visible-xs pull-left">
                     <li ui-sref-active="active" id="user-on-nav-xs">
                         <a ui-sref="home">
@@ -16,22 +18,22 @@
                     </li>
 
                 </ul>
-        </div>
+            </div>
 
-        <div id="navbar" class="navbar-collapse collapse text-center">
-            <ul class="nav navbar-nav text-center">
-                <li ui-sref-active="active" id="cog-on-nav" class="hidden-xs">
+            <div id="navbar" class="navbar-collapse collapse text-center">
+                <ul class="nav navbar-nav text-center">
+                    <li ui-sref-active="active" id="cog-on-nav" class="hidden-xs">
                         <a ui-sref="home">
                             <i class="fa fa-calendar fa-3x"></i>
                         </a>
-                </li>
-                <li ui-sref-active="active" id="cog-on-nav" class="hidden-xs">
+                    </li>
+                    <li ui-sref-active="active" id="cog-on-nav" class="hidden-xs">
                         <a ui-sref="my-bookings">
                             <i class="fa fa-user fa-3x"></i>
                         </a>
-                </li>
+                    </li>
 
-            </ul>
+                </ul>
                 <!-- nav right -->
                 <ul class="nav navbar-nav navbar-right">
 
@@ -43,86 +45,92 @@
 
                 </ul>
 
-        </div>
-
-    </div>
-</nav>
-
-
-<div class="container-fluid" ng-cloak>
-    <div class="row home">
-
-    <div class="calendar-block col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        <!-- <div ui-calendar="uiConfig.calendar" ng-model="booking" calendar="myCalendar"></div> -->
-
-        <div class="top-nav-reverse text-center" ng-cloak>
-            <strong>[[ dateNow ]]</strong>
-        </div>
-
-        <table class="date-table table">
-            <thead>
-            <tr>
-                <th ng-repeat="date in dates">
-                    [[ date | date: 'EEE' ]]
-                </th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td ng-repeat="date in dates" ng-click="getOrdersBySelectedDate(date);select($index)" ng-class="{active: $index == selected}">
-                    [[ date | date: 'd']]
-                </td>
-            </tr>
-            </tbody>
-        </table>
-
-    </div>
-
-<md-button class="md-primary md-raised" ng-click="showConfirm($event)" flex-sm="100" flex-md="100" flex-gt-md="auto">
-      Alert Dialog
-    </md-button>
-[[ status ]]
-    <!-- preloader for time list -->
-    <div class="row" ng-hide="bookingLoad">
-        <div class="wrapper col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center center-block">
-            <div layout="row" layout-align="space-around">
-                <md-progress-circular md-mode="indeterminate"></md-progress-circular>
             </div>
+
         </div>
-    </div>
+    </nav>
 
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" ng-if="bookingLoad">
-        <div class="row">
-            <div class="order-time-step col-lg-3 col-md-4 col-sm-4 col-xs-12"
-                 ng-class="{'disable-time-slot':booking.is_booked}" ng-repeat="booking in booking">
-                <div class="row">
 
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-6 text-center">
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                                <h5>[[ selectedDate | date:'MMM d' ]]</h5>
-                                <h4><strong>[[ booking.time_start | limitTo:5 ]] - [[ booking.time_end | limitTo:5 ]]</strong></h4>
-                            </div>
-                        </div>
+    <div class="container-fluid" ng-cloak>
+        <div class="row home">
 
+            <div class="calendar-block col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                <!-- <div ui-calendar="uiConfig.calendar" ng-model="booking" calendar="myCalendar"></div> -->
+
+                <div class="top-nav-reverse text-center" ng-cloak>
+                    <strong>[[ dateNow ]]</strong>
+                </div>
+
+                <table class="date-table table">
+                    <thead>
+                    <tr>
+                        <th ng-repeat="date in dates">
+                            [[ date | date: 'EEE' ]]
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td ng-repeat="date in dates" ng-click="getOrdersBySelectedDate(date);select($index)"
+                            ng-class="{active: $index == selected}">
+                            [[ date | date: 'd']]
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+            <md-button class="md-primary md-raised" ng-click="showConfirm($event)" flex-sm="100" flex-md="100"
+                       flex-gt-md="auto">
+                Alert Dialog
+            </md-button>
+            [[ status ]]
+            <!-- preloader for time list -->
+            <div class="row" ng-hide="bookingLoad">
+                <div class="wrapper col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center center-block">
+                    <div layout="row" layout-align="space-around">
+                        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
                     </div>
-
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-6 text-center">
-                        <md-button class="md-raised" ng-hide="booking.is_booked" data-animation="am-fade-and-scale" data-placement="center"
-                                   data-template-url="static/partials/modals/add_order_modal.html" data-delay-show="1000" bs-modal="modal">
-                            <i class="fa fa-plus fa-md"></i> Order
-                        </md-button>
-                    </div>
-
                 </div>
             </div>
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" ng-if="bookingLoad">
+                <div class="row">
+                    <div class="order-time-step col-lg-3 col-md-4 col-sm-4 col-xs-12"
+                         ng-class="{'disable-time-slot':booking.is_booked}" ng-repeat="booking in booking">
+                        <div class="row">
+
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-6 text-center">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                                        <h5>[[ selectedDate | date:'MMM d' ]]</h5>
+                                        <h4><strong>[[ booking.time_start | limitTo:5 ]] - [[ booking.time_end |
+                                            limitTo:5 ]]</strong></h4>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-6 text-center">
+                                <md-button class="md-raised" ng-hide="booking.is_booked"
+                                           data-animation="am-fade-and-scale" data-placement="center"
+                                           data-template-url="static/partials/modals/add_order_modal.html"
+                                           data-delay-show="1000" bs-modal="modal">
+                                    <i class="fa fa-plus fa-md"></i> Order
+                                </md-button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
-</div>
-</div>
-
-<!-- Flash error messages -->
-<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-    <div flash-message="4000"></div>
+    <!-- Flash error messages -->
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+        <div flash-message="4000"></div>
+    </div>
 </div>

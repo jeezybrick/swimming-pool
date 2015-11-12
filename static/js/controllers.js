@@ -8,6 +8,7 @@ angular
 
 function HomeController($scope, $timeout, AuthUser, Booking, MyBookings, Flash, $modal, $location, $mdDialog) {
 
+    $scope.isUserAuth = false;
     $scope.bookingLoad = false;
     $scope.pageLoad = false;
     $scope.makeOrderModalQuestion = "Do you wan't to make the order?";
@@ -34,6 +35,8 @@ function HomeController($scope, $timeout, AuthUser, Booking, MyBookings, Flash, 
         // if user is not active - redirect
         if (angular.equals(response.is_auth, false)) {
             $location.path('/login/');
+        }else{
+            $scope.isUserAuth = true;
         }
 
         /**
@@ -121,21 +124,21 @@ function HomeController($scope, $timeout, AuthUser, Booking, MyBookings, Flash, 
         $scope.selected = index;
     };
 
-    $scope.showConfirm = function(ev) {
-    // Appending dialog to document.body to cover sidenav in docs app
-    var confirm = $mdDialog.confirm()
-          .title('Are you sure?')
-          .content($scope.makeOrderModalQuestion)
-          .ariaLabel('Lucky day')
-          .targetEvent(ev)
-          .ok('Yes')
-          .cancel('No');
-    $mdDialog.show(confirm).then(function() {
-      $scope.status = 'You decided to get rid of your debt.';
-    }, function() {
-      $scope.status = 'You decided to keep your debt.';
-    });
-  };
+    $scope.showConfirm = function (ev) {
+        // Appending dialog to document.body to cover sidenav in docs app
+        var confirm = $mdDialog.confirm()
+            .title('Are you sure?')
+            .content($scope.makeOrderModalQuestion)
+            .ariaLabel('Lucky day')
+            .targetEvent(ev)
+            .ok('Yes')
+            .cancel('No');
+        $mdDialog.show(confirm).then(function () {
+            $scope.status = 'You decided to get rid of your debt.';
+        }, function () {
+            $scope.status = 'You decided to keep your debt.';
+        });
+    };
 
 }
 
@@ -197,6 +200,7 @@ angular
 function BookingsController($scope, $location, Flash, MyBookings, AuthUser) {
 
     var date = new Date();
+    $scope.isUserAuth = false;
     $scope.currentDate = moment(date).format('MMMM ' + 'YYYY');
     $scope.ordersLoad = false;
     $scope.deleteOrderModalQuestion = "Do you wan't to delete this order?";
@@ -206,6 +210,8 @@ function BookingsController($scope, $location, Flash, MyBookings, AuthUser) {
 
         if (angular.equals(response.is_auth, false)) {
             $location.path('/login/');
+        }else{
+            $scope.isUserAuth = true;
         }
 
         $scope.bookings = MyBookings.query(function () {
@@ -251,12 +257,16 @@ angular
 function AuthController($scope, $location, AuthUser) {
 
     $scope.title = 'signup';
+    $scope.isUserAuth = false;
 
     $scope.user = AuthUser.query(function (response) {
 
         if (angular.equals(response.is_auth, false)) {
             $location.path('/login/');
+        } else {
+            $scope.isUserAuth = true;
         }
+
 
     }, function () {
 
@@ -274,7 +284,7 @@ function PageController($scope) {
 
     $scope.pageLoad = false;
 
-   angular.element(document).ready(function () {
+    angular.element(document).ready(function () {
         $scope.pageLoad = true;
     });
 
