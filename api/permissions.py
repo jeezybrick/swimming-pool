@@ -11,11 +11,11 @@ class IsAuthorOrReadOnly(permissions.BasePermission):
         return True if is_safe_method(request) else obj.user == request.user
 
 
-class IsActiveOrReadOnly(permissions.BasePermission):
+class IsActive(permissions.BasePermission):
     # message = _("You don't input member_id yet")
 
     def has_object_permission(self, request, view, obj):
-        return True if is_safe_method(request) else request.user.is_auth
+        return request.user.is_auth
 
     def has_permission(self, request, view):
-        return True if is_safe_method(request) else request.user.is_auth
+        return request.user.is_auth

@@ -13,7 +13,7 @@ from rest_framework.response import Response
 
 from booking.models import Booking, BookingTimeStep
 from api import serializers, utils, validators
-from api.permissions import IsAuthorOrReadOnly, IsActiveOrReadOnly
+from api.permissions import IsAuthorOrReadOnly, IsActive
 from my_auth.models import OAuthUser
 
 
@@ -26,7 +26,7 @@ class StandardResultsSetPagination(PageNumberPagination):
 
 # List of orders
 class BookingList(APIView):
-    permission_classes = (permissions.IsAuthenticated, IsActiveOrReadOnly, IsActiveOrReadOnly, )
+    permission_classes = (permissions.IsAuthenticated, IsActive, IsActive, )
 
     def get(self, request):
         queryset = Booking.objects.filter(user=self.request.user).order_by('start_date')
@@ -55,7 +55,7 @@ class BookingList(APIView):
 
 # Order detail
 class BookingDetail(APIView):
-    permission_classes = (permissions.IsAuthenticated, IsAuthorOrReadOnly, IsActiveOrReadOnly)
+    permission_classes = (permissions.IsAuthenticated, IsAuthorOrReadOnly, IsActive)
     maxTime = 5 * 60  # 5 minutes grace period
     maxRemoveAttempt = 3
     bannedToDays = 5
