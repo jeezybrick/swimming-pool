@@ -1,8 +1,8 @@
-import json
+import datetime
 from django.utils import timezone
 from django.core.mail import send_mail
 from django.utils.translation import ugettext_lazy as _
-from django.http import Http404, JsonResponse
+from django.http import Http404
 from rest_framework import generics, status, permissions
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.views import APIView
@@ -94,7 +94,7 @@ class BookingTimeStepList(generics.GenericAPIView):
 
     def get(self, request):
 
-        date = request.GET.get('date', False)
+        date = request.GET.get('date', datetime.datetime.now().strftime('%Y-%m-%d'))
         list = utils.get_time_step(request, date)
 
         return Response(list)
