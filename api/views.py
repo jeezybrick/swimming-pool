@@ -1,7 +1,8 @@
+import json
 from django.utils import timezone
 from django.core.mail import send_mail
 from django.utils.translation import ugettext_lazy as _
-from django.http import Http404
+from django.http import Http404, JsonResponse
 from rest_framework import generics, status, permissions
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.views import APIView
@@ -92,21 +93,14 @@ class BookingTimeStepList(generics.GenericAPIView):
     permission_classes = (permissions.IsAuthenticated, )
 
     def get(self, request):
-        queryset = BookingTimeStep.objects.all()
 
-        page = self.paginate_queryset(queryset)
-        if page is not None:
-            serializer = self.get_serializer(page, many=True)
-            return self.get_paginated_response(serializer.data)
+        date = request.GET.get('date', False)
+        list = utils.get_time_step(request, date)
 
-        date = request.GET.get('date', None)
-
-        serializer = serializers.BookingTimeStepSerializer(queryset, context={'request': request,
-                                                                              'date': date}, many=True)
-        return Response(serializer.data)
+        return Response(list)
 
 
-# List of orders
+# Current user detail
 class CurrentUserDetail(generics.GenericAPIView):
     serializer_class = serializers.UserSerializer
     permission_classes = (permissions.IsAuthenticated, )

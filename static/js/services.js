@@ -6,7 +6,10 @@
 angular.module('myApp.services', ['ngResource'])
 
     .factory('Booking', function ($resource) {
-        return $resource('/api/booking_time/:id/');
+        return $resource('/api/booking_time/:id/'
+        , {id: '@id'}, {
+            'query': {method: 'GET', isArray: true}
+        });
     })
 
     .factory('MyBookings', function ($resource) {

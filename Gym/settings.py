@@ -60,7 +60,6 @@ INSTALLED_APPS = (
     'allauth.account',
     'rest_auth.registration',
     'allauth.socialaccount',
-    'allauth.socialaccount.providers.facebook',
     'social.apps.django_app.default',
     'djcelery',
 
@@ -150,17 +149,11 @@ EMAIL_HOST_PASSWORD = 'pass'
 SOCIAL_AUTH_USER_MODEL = 'my_auth.OAuthUser'
 
 AUTHENTICATION_BACKENDS = (
-    'social.backends.facebook.FacebookOAuth2',
     'social.backends.github.GithubOAuth2',
     'social.backends.google.GoogleOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 )
 
-SOCIAL_AUTH_GITHUB_KEY = '2abee56deea44960508b'
-SOCIAL_AUTH_GITHUB_SECRET = '4be14a5e6acef884cae00b76defa6cea86854a4c'
-
-SOCIAL_AUTH_FACEBOOK_KEY = '1627150820892036'
-SOCIAL_AUTH_FACEBOOK_SECRET = 'e2b17ae2c8a8eb78c70c05d16136cedd'
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '498316320509-64nn07fvqn3a76o8bk72s2bimmgaa273.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'Hwz3MmoURnU6CpT2h9ssMrQU'
@@ -171,7 +164,8 @@ SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 SOCIAL_AUTH_GOOGLE_OAUTH2_USE_DEPRECATED_API = True
 
 # Google OAuth2 (google-oauth2)
-SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = ['email', 'profile', 'https://www.googleapis.com/auth/calendar']
+SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = ['email', 'profile', 'https://www.googleapis.com/auth/calendar',
+                                   'https://www.googleapis.com/auth/calendar.readonly']
 
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
 
