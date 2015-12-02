@@ -48,5 +48,4 @@ def get_time_step(request, start_date):
         temp4 = temp3.time()
         count_of_steps += -1
 
-
     return list
