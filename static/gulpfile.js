@@ -14,7 +14,7 @@ gulp.task('default', function() {
 gulp.task('autoprefix', function(){
     return gulp.src('css/*.css')
         .pipe(autoprefixer({
-            browsers: ['last 10 versions'],
+            browsers: ['last 5 versions'],
             cascade: false
         }))
         .pipe(gulp.dest('css'));
