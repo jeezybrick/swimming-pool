@@ -85,7 +85,8 @@
                        flex-gt-md="auto">
                 Alert Dialog
             </md-button>
-            [[ status ]]
+
+
             <!-- preloader for time list -->
             <div class="row" ng-hide="bookingLoad">
                 <div class="wrapper col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center center-block">
@@ -93,8 +94,6 @@
                         <md-progress-circular md-mode="indeterminate"></md-progress-circular>
                     </div>
                 </div>
-            </div>
-            <div ng-repeat="booking in booking">
             </div>
 
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" ng-if="bookingLoad">

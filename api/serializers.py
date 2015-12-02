@@ -2,7 +2,7 @@ import datetime
 from django.utils.translation import ugettext_lazy as _
 from rest_framework import serializers
 from my_auth.models import OAuthUser
-from booking.models import Booking, BookingTimeStep
+from booking.models import Booking
 from api.utils import get_free_swim_lanes
 
 
@@ -47,24 +47,3 @@ class BookingSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError(_("Invalid seconds in time"))
 
         return start_time
-
-
-class BookingTimeStepSerializer(serializers.ModelSerializer):
-
-    is_booked = serializers.SerializerMethodField(read_only=True)
-
-    def get_is_booked(self, obj):
-        request = self.context.get('request', None)
-        start_time = obj.time_start
-        start_date = self.context.get('date', None)
-
-        # return set of free's swim lanes
-        free_swim_lanes = get_free_swim_lanes(start_time, start_date)
-        if not free_swim_lanes:
-            return True
-
-        return Booking.objects.filter(start_time=obj.time_start, user=request.user, start_date=start_date).exists()
-
-    class Meta:
-        model = BookingTimeStep
-        fields = ('id', 'time_start', 'time_end', 'is_booked', )

@@ -13,11 +13,3 @@ class Booking(models.Model):
 
     def __unicode__(self):
         return self.user
-
-
-class BookingTimeStep(models.Model):
-    time_start = models.TimeField()
-    time_end = models.TimeField()
-
-    def __str__(self):
-        return self.time_start

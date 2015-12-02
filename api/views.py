@@ -8,7 +8,7 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-from booking.models import Booking, BookingTimeStep
+from booking.models import Booking
 from api import serializers, utils, validators
 from api.permissions import IsAuthorOrReadOnly, IsActive
 from my_auth.models import OAuthUser
@@ -87,9 +87,7 @@ class BookingDetail(APIView):
 
 
 # List of time.30 min step
-class BookingTimeStepList(generics.GenericAPIView):
-    serializer_class = serializers.BookingTimeStepSerializer
-    queryset = BookingTimeStep.objects.all()
+class BookingTimeStepList(APIView):
     permission_classes = (permissions.IsAuthenticated, )
 
     def get(self, request):
