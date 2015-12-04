@@ -170,3 +170,11 @@
 .date-table td:hover, .date-table td[class~="active"]{
     background-color: #eee;
 }
+
+md-backdrop.md-dialog-backdrop {
+    z-index: 9999;
+}
+
+.md-dialog-container {
+    z-index: 10000;
+}

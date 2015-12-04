@@ -63,7 +63,6 @@ function HomeController($scope, $timeout, AuthUser, Booking, MyBookings, Flash, 
      */
     $scope.makeOrder = function (index) {
 
-
         $scope.order = new MyBookings();
         $scope.order.start_time = $scope.booking[index].time_start;
         $scope.order.end_time = $scope.booking[index].time_end;
@@ -88,7 +87,7 @@ function HomeController($scope, $timeout, AuthUser, Booking, MyBookings, Flash, 
 
                 $scope.showModal()
 
-            }, 250);
+            }, 0);
 
         }, function (error) {
 
@@ -124,20 +123,25 @@ function HomeController($scope, $timeout, AuthUser, Booking, MyBookings, Flash, 
         $scope.selected = index;
     };
 
-    $scope.showConfirm = function (ev) {
-        // Appending dialog to document.body to cover sidenav in docs app
-        var confirm = $mdDialog.confirm()
-            .title('Are you sure?')
-            .content($scope.makeOrderModalQuestion)
-            .ariaLabel('Lucky day')
-            .targetEvent(ev)
-            .ok('Yes')
-            .cancel('No');
-        $mdDialog.show(confirm).then(function () {
-            $scope.status = 'You decided to get rid of your debt.';
-        }, function () {
-            $scope.status = 'You decided to keep your debt.';
-        });
+    $scope.showConfirm = function (ev, index) {
+
+         $mdDialog.show({
+            controller: ModalController,
+            templateUrl: 'static/partials/modals/add_order_modal.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose: true,
+            locals: {
+                makeOrderModalQuestion:$scope.makeOrderModalQuestion,
+                order: index,
+            }
+        })
+            .then(function (order) {
+                console.log('then!');
+                $scope.makeOrder(order);
+            }, function () {
+                console.log('then!-second');
+            });
     };
 
 }
@@ -289,3 +293,23 @@ function PageController($scope) {
     });
 
 }
+
+
+angular
+    .module('myApp')
+    .controller('ModalController', ModalController);
+
+function ModalController($scope, $mdDialog, makeOrderModalQuestion, order) {
+    $scope.makeOrderModalQuestion = makeOrderModalQuestion;
+    $scope.order = order;
+
+    $scope.approveDialog = function () {
+        $mdDialog.hide(order);
+    };
+
+    $scope.cancel = function() {
+    $mdDialog.cancel();
+  };
+
+}
+
