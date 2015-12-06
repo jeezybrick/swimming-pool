@@ -2,8 +2,9 @@ var gulp = require('gulp'),
     imagemin = require('gulp-imagemin'),
     uglify = require('gulp-uglify'),
     minifyCss = require('gulp-minify-css'),
-    plumber = require('gulp-plumber'),
-    autoprefixer = require('gulp-autoprefixer'); // for error handling
+    plumber = require('gulp-plumber'), // for error handling
+    autoprefixer = require('gulp-autoprefixer'),
+    sass = require('gulp-sass');
 
 // default
 gulp.task('default', function() {
@@ -22,7 +23,7 @@ gulp.task('autoprefix', function(){
 
 // watch changes of files
 gulp.task('watch', function() {
-    gulp.watch('css/*.css', ['minify-css']);
+    gulp.watch('css/*.css', ['minify-css', 'sass']);
 });
 
 // compress images
@@ -45,4 +46,12 @@ gulp.task('minify-css', function() {
     .pipe(plumber())
     .pipe(minifyCss({compatibility: 'ie8'}))
     .pipe(gulp.dest('css/minified'));
+});
+
+
+// SCSS
+gulp.task('sass', function () {
+  gulp.src('sass/*.scss')
+    .pipe(sass().on('error', sass.logError))
+    .pipe(gulp.dest('css/sass'));
 });
