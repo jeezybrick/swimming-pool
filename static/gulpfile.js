@@ -4,12 +4,8 @@ var gulp = require('gulp'),
     minifyCss = require('gulp-minify-css'),
     plumber = require('gulp-plumber'), // for error handling
     autoprefixer = require('gulp-autoprefixer'),
-<<<<<<< HEAD
     sass = require('gulp-sass'),
     livereload = require('gulp-livereload');
-=======
-    sass = require('gulp-sass');
->>>>>>> 94c894deddfa06d7f5a77a54b7049c9a1c72c787
 
 // default
 gulp.task('default', function() {
@@ -37,13 +33,9 @@ gulp.task('html', function() {
 
 // watch changes of files
 gulp.task('watch', function() {
-<<<<<<< HEAD
     livereload.listen();
     gulp.watch('css/*.css', ['minify-css', 'sass']);
     gulp.watch('partials/*.html', ['html']);
-=======
-    gulp.watch('css/*.css', ['minify-css', 'sass']);
->>>>>>> 94c894deddfa06d7f5a77a54b7049c9a1c72c787
 });
 
 // compress images
