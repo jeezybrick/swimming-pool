@@ -1,0 +1,184 @@
+.page-preloader {
+  position: fixed;
+  top: 30%;
+  right: 0;
+  left: 0;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 0;
+  width: 30%;
+  z-index: 9999999;
+}
+
+.top-nav {
+  position: fixed;
+  width: 100%;
+  height: 60px;
+  background-color: #e7e7e7;
+  padding-top: 20px;
+  color: gray;
+  text-transform: uppercase;
+}
+
+.top-nav-reverse {
+  position: fixed;
+  top: 0;
+  background-color: transparent;
+  color: white;
+  text-transform: uppercase;
+  z-index: 99999;
+  margin-top: 15px;
+  right: 0;
+  left: 0;
+  margin-right: auto;
+  margin-left: auto;
+  width: 40%;
+}
+
+.auth-block {
+  margin-top: 150px;
+}
+
+.wrapper {
+  margin-top: 80px;
+}
+
+.wrapper-form {
+  text-align: center;
+  margin-top: 150px;
+}
+
+.home {
+  margin-top: 150px;
+}
+
+.flash-message {
+  margin-top: 60px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 0;
+  width: 30%;
+}
+
+#cog-on-nav {
+  margin-right: 10px;
+  > a {
+    padding: 3px 5px;
+    min-height: 50px;
+  }
+}
+
+#user-on-nav-xs > a {
+  padding: 3px 0;
+  margin: 0 30px;
+}
+
+#calendar-on-nav-xs > a {
+  padding: 3px 0;
+  margin-left: 15px;
+}
+
+.disable-time-slot {
+  background-color: #EBE9E9;
+}
+
+.cancel-order-block {
+  margin-top: 30px;
+  > a {
+    color: gray;
+  }
+}
+
+.order-time-step {
+  border: solid 1px #ddd;
+  padding: 30px;
+  height: 160px;
+}
+
+.calendar-block {
+  margin-top: -100px;
+  padding: 0;
+}
+
+.order-detail {
+  border: solid 1px #ddd;
+  &.ng-enter {
+    -webkit-animation: fadeInUp 1s;
+    animation: fadeInUp 1s;
+  }
+  &.ng-leave {
+    -webkit-animation: fadeOut 1s;
+    animation: fadeOut 1s;
+  }
+}
+
+/* ng - animate */
+
+.order-time-step.ng-enter {
+  -webkit-animation: fadeInDown 1s;
+  animation: fadeInDown 1s;
+}
+
+/*! ng - animate */
+
+.modal.center .modal-dialog {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  min-width: 320px;
+  max-width: 630px;
+  width: 50%;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  -ms-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.modal-footer {
+  text-align: center;
+  > button {
+    border-radius: 25px;
+    padding: 10px 30px;
+  }
+}
+
+.date-table {
+  position: fixed;
+  z-index: 999;
+  margin-bottom: 0;
+  > tbody > tr {
+    background-color: white;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 20px !important;
+  }
+  th {
+    text-align: center;
+    background-color: #f9f9f9;
+    padding: 10px !important;
+    border: 1px solid #ddd;
+  }
+  td {
+    padding-top: 15px !important;
+    &:hover, &[class~="active"] {
+      background-color: #eee;
+    }
+  }
+}
+
+md-backdrop.md-dialog-backdrop {
+  z-index: 9999;
+}
+
+.md-dialog-container {
+  z-index: 10000;
+}
+
+.logout-xs{
+  margin-right: 5px;
+  & a{
+    padding: 0 15px;
+  }
+}

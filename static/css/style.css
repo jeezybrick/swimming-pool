@@ -1,7 +1,7 @@
-.page-preloader{
+.page-preloader {
     position: fixed;
     top: 30%;
-     right: 0;
+    right: 0;
     left: 0;
     margin-right: auto;
     margin-left: auto;
@@ -9,6 +9,7 @@
     width: 30%;
     z-index: 9999999;
 }
+
 .top-nav {
     position: fixed;
     width: 100%;
@@ -27,18 +28,21 @@
     text-transform: uppercase;
     z-index: 99999;
     margin-top: 15px;
-     right: 0;
+    right: 0;
     left: 0;
     margin-right: auto;
     margin-left: auto;
     width: 40%;
 }
-.auth-block{
+
+.auth-block {
     margin-top: 150px;
 }
-.wrapper{
+
+.wrapper {
     margin-top: 80px;
 }
+
 .wrapper-form {
     text-align: center;
     margin-top: 150px;
@@ -52,7 +56,7 @@
     margin-top: 60px;
     position: fixed;
     top: 0;
-     right: 0;
+    right: 0;
     left: 0;
     margin-right: auto;
     margin-left: auto;
@@ -121,53 +125,57 @@
     -webkit-animation: fadeInDown 1s;
     animation: fadeInDown 1s;
 }
+
 /*! ng - animate */
 
 .modal.center .modal-dialog {
-    position:fixed;
-    top:40%;
-    left:50%;
-    min-width:320px;
-    max-width:630px;
-    width:50%;
-    -webkit-transform:translateX(-50%) translateY(-50%);
-    -ms-transform:translateX(-50%) translateY(-50%);
-    transform:translateX(-50%) translateY(-50%)
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    min-width: 320px;
+    max-width: 630px;
+    width: 50%;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    -ms-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%)
 }
 
-.modal-footer{
+.modal-footer {
     text-align: center;
 }
-.modal-footer > button{
+
+.modal-footer > button {
     border-radius: 25px;
     padding: 10px 30px;
 }
-.date-table{
+
+.date-table {
     position: fixed;
     z-index: 999;
     margin-bottom: 0;
 
 }
 
-.date-table > tbody > tr{
+.date-table > tbody > tr {
     background-color: white;
     border-bottom: 1px solid #ddd;
     padding-bottom: 20px !important;
 
 }
 
-.date-table th{
+.date-table th {
     text-align: center;
     background-color: #f9f9f9;
     padding: 10px !important;
     border: 1px solid #ddd;
 }
-.date-table td{
-     padding-top: 15px !important;
+
+.date-table td {
+    padding-top: 15px !important;
 
 }
 
-.date-table td:hover, .date-table td[class~="active"]{
+.date-table td:hover, .date-table td[class~="active"] {
     background-color: #eee;
 }
 
@@ -178,3 +186,8 @@ md-backdrop.md-dialog-backdrop {
 .md-dialog-container {
     z-index: 10000;
 }
+
+.logout-xs {
+  margin-right: 5px; }
+  .logout-xs a {
+    padding: 0 15px; }

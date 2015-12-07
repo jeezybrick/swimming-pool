@@ -11,6 +11,7 @@
     <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
+
                 <ul class="nav navbar-nav visible-xs pull-left">
                     <li ui-sref-active="active" id="user-on-nav-xs">
                         <a ui-sref="home">
@@ -18,6 +19,7 @@
                         </a>
                     </li>
                 </ul>
+
                 <ul class="nav navbar-nav visible-xs pull-left">
                     <li ui-sref-active="active" id="calendar-on-nav-xs">
                         <a ui-sref="my-bookings">
@@ -26,6 +28,16 @@
                     </li>
 
                 </ul>
+
+                <ul class="nav navbar-nav visible-xs pull-right logout-xs">
+                    <li>
+                        <a  href="/auth/logout/" target="_self">
+                            <img height="32" src="/static/images/icons/logout.svg" alt="Logout">
+                        </a>
+                    </li>
+
+                </ul>
+
             </div>
 
             <div id="navbar" class="navbar-collapse collapse text-center">

@@ -34,8 +34,9 @@ gulp.task('html', function() {
 // watch changes of files
 gulp.task('watch', function() {
     livereload.listen();
-    gulp.watch('css/*.css', ['minify-css', 'sass']);
-    gulp.watch('partials/*.html', ['html']);
+    gulp.watch('css/*.css', ['minify-css']);
+    gulp.watch('partials/**/*.html', ['html']);
+    gulp.watch('sass/*.scss', ['sass']);
 });
 
 // compress images
