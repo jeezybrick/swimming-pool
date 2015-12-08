@@ -137,10 +137,11 @@ function HomeController($scope, $timeout, AuthUser, Booking, MyBookings, Flash, 
             }
         })
             .then(function (order) {
-                console.log('then!');
+                // Make order then approve
                 $scope.makeOrder(order);
+
             }, function () {
-                console.log('then!-second');
+
             });
     };
 

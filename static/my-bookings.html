@@ -9,66 +9,7 @@
 
 <div class="my-booking-wrapper" ng-show="isUserAuth">
 
-    <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
-        <div class="container-fluid">
-            <div class="navbar-header">
-
-                <ul class="nav navbar-nav visible-xs pull-left">
-                    <li ui-sref-active="active" id="user-on-nav-xs">
-                        <a ui-sref="home">
-                            <i class="fa fa-calendar fa-2x"></i>
-                        </a>
-                    </li>
-                </ul>
-
-                <ul class="nav navbar-nav visible-xs pull-left">
-                    <li ui-sref-active="active" id="calendar-on-nav-xs">
-                        <a ui-sref="my-bookings">
-                            <i class="fa fa-user fa-2x"></i>
-                        </a>
-                    </li>
-
-                </ul>
-
-                <ul class="nav navbar-nav visible-xs pull-right logout-xs">
-                    <li>
-                        <a  href="/auth/logout/" target="_self">
-                            <img height="32" src="/static/images/icons/logout.svg" alt="Logout">
-                        </a>
-                    </li>
-                </ul>
-
-            </div>
-
-            <div id="navbar" class="navbar-collapse collapse text-center">
-                <ul class="nav navbar-nav text-center">
-                    <li ui-sref-active="active" id="cog-on-nav" class="hidden-xs">
-                        <a ui-sref="home">
-                            <i class="fa fa-calendar fa-3x"></i>
-                        </a>
-                    </li>
-                    <li ui-sref-active="active" id="cog-on-nav" class="hidden-xs">
-                        <a ui-sref="my-bookings">
-                            <i class="fa fa-user fa-3x"></i>
-                        </a>
-                    </li>
-
-                </ul>
-                <!-- nav right -->
-                <ul class="nav navbar-nav navbar-right">
-
-                    <li>
-                        <a href="/auth/logout/" target="_self">
-                            Logout
-                        </a>
-                    </li>
-
-                </ul>
-
-            </div>
-
-        </div>
-    </nav>
+   <div ng-include="'/static/partials/nav.html'"></div>
 
     <div ng-cloak class="wrapper col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-if="ordersLoad">
         <div class="top-nav-reverse text-center" ng-cloak>

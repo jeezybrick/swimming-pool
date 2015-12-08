@@ -146,4 +146,4 @@ md-backdrop.md-dialog-backdrop {
 .logout-xs {
   margin-right: 5px; }
   .logout-xs a {
-    padding: 0 15px; }
+    padding: 0 15px !important; }
