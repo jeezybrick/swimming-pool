@@ -102,23 +102,23 @@ WSGI_APPLICATION = 'Gym.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd1brp3mhies2cm',
-        'USER': 'wxlpxydusmrtma',
-        'PORT': '5432',
-        'PASSWORD': '7aca07d15d67214c4c8a5fcf9de28da10a9a567b0fcf260db5333039a6464ab3',
-        'HOST': 'ec2-54-247-177-33.eu-west-1.compute.amazonaws.com',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'd1brp3mhies2cm',
+#         'USER': 'wxlpxydusmrtma',
+#         'PORT': '5432',
+#         'PASSWORD': '7aca07d15d67214c4c8a5fcf9de28da10a9a567b0fcf260db5333039a6464ab3',
+#         'HOST': 'ec2-54-247-177-33.eu-west-1.compute.amazonaws.com',
+#     }
+# }
 
 
 # Internationalization
