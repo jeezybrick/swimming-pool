@@ -205,3 +205,4 @@ SOCIAL_AUTH_PIPELINE = (
 
 
 CELERY_ALWAYS_EAGER = True
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
