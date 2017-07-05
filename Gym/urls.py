@@ -30,7 +30,7 @@ urlpatterns = [
     # Social
     url('', include('social.apps.django_app.urls', namespace='social')),
 
-    url(r'^.*$', TemplateView.as_view(
+    url(r"^$", TemplateView.as_view(
         template_name='layout.html'
     ), name='home'),
 ]
